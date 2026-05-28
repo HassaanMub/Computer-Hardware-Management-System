@@ -590,7 +590,120 @@ class Inventory {
         System.out.println("Motherboard Updated Successfully!\n");
     }
     // Delete Methods
-    // Continue From Here
+    public void deleteCPU() {
+        if (cpus.isEmpty()) { 
+            System.out.println("No CPUs in Inventory.\n"); 
+            return; 
+        }
+        System.out.println("--- CPU List ---");
+        for (int i = 0; i < cpus.size(); i++) {
+            System.out.print("(" + (i + 1) + ") ");
+            cpus.get(i).display();
+        }
+        System.out.print("Select CPU Number to Delete: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > cpus.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        CPU removed = cpus.remove(choice - 1);
+        System.out.println("Deleted: " + removed.brand + " " + removed.modelName + "\n");
+    }
+    public void deleteGPU() {
+        if (gpus.isEmpty()) { 
+            System.out.println("No GPUs in Inventory.\n"); 
+            return; 
+        }
+        System.out.println("--- GPU List ---");
+        for (int i = 0; i < gpus.size(); i++) {
+            System.out.print("(" + (i + 1) + ") ");
+            gpus.get(i).display();
+        }
+        System.out.print("Select GPU Number to Delete: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > gpus.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        GPU removed = gpus.remove(choice - 1);
+        System.out.println("Deleted: " + removed.brand + " " + removed.modelName + "\n");
+    }
+    public void deleteRAM() {
+        if (rams.isEmpty()) { 
+            System.out.println("No RAM in Inventory.\n"); 
+            return; 
+        }
+        System.out.println("--- RAM List ---");
+        for (int i = 0; i < rams.size(); i++) {
+            System.out.print("(" + (i + 1) + ") ");
+            rams.get(i).display();
+        }
+        System.out.print("Select RAM Number to Delete: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > rams.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        RAM removed = rams.remove(choice - 1);
+        System.out.println("Deleted: " + removed.brand + " " + removed.modelName + "\n");
+    }
+    public void deleteStorage() {
+        if (storage.isEmpty()) { 
+            System.out.println("No Storage in Inventory.\n"); 
+            return; 
+        }
+        System.out.println("--- Storage List ---");
+        for (int i = 0; i < storage.size(); i++) {
+            System.out.print("(" + (i + 1) + ") ");
+            storage.get(i).display();
+        }
+        System.out.print("Select Storage Number to Delete: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > storage.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        Storage removed = storage.remove(choice - 1);
+        System.out.println("Deleted: " + removed.brand + " " + removed.modelName + "\n");
+    }
+    public void deletePSU() {
+        if (psus.isEmpty()) { 
+            System.out.println("No PSUs in Inventory.\n"); 
+            return; 
+        }
+        System.out.println("--- PSU List ---");
+        for (int i = 0; i < psus.size(); i++) {
+            System.out.print("(" + (i + 1) + ") ");
+            psus.get(i).display();
+        }
+        System.out.print("Select PSU Number to Delete: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > psus.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        PSU removed = psus.remove(choice - 1);
+        System.out.println("Deleted: " + removed.brand + " " + removed.modelName + "\n");
+    }
+    public void deleteMB() {
+        if (mbs.isEmpty()) { 
+            System.out.println("No Motherboards in Inventory.\n"); 
+            return; 
+        }
+        System.out.println("--- Motherboard List ---");
+        for (int i = 0; i < mbs.size(); i++) {
+            System.out.print("(" + (i + 1) + ") ");
+            mbs.get(i).display();
+        }
+        System.out.print("Select Motherboard Number to Delete: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > mbs.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        MotherBoard removed = mbs.remove(choice - 1);
+        System.out.println("Deleted: " + removed.brand + " " + removed.modelName + "\n");
+    }
     // Display Methods
     public void displayAllHardware(){
         // CPUs
@@ -688,33 +801,24 @@ public class Main{
             System.out.println("Press 2 to Edit Hardware");
             System.out.println("Press 3 to Delete Hardware");
             System.out.println("Press 4 to Display Hardwares");
-            System.out.println("Press 5 to Manage Users");
-            System.out.println("Press 6 to Exit");
+            System.out.println("Press 5 to Display Computers");
+            System.out.println("Press 6 to Build Computer");
+            System.out.println("Press 7 to Manage Users");
+            System.out.println("Press 8 to Exit");
             System.out.println("Enter Choice: ");
             choice = sc.nextInt();
             switch(choice){
-                case 1:
-                    addHardware();
-                    break;
-                case 2:
-                    editHardware();
-                    break;
-                case 3:
-                    delHardware();
-                    break;
-                case 4:
-                    displayHardware();
-                    break;
-                case 5:
-                    manageUsers();
-                    break;
-                case 6:
-                    System.out.println("Exiting...");
-                    break;
-                default:
-                    System.out.println("Invalid Choice");
+                case 1: addHardware();      break;
+                case 2: editHardware();     break;
+                case 3: delHardware();      break;
+                case 4: displayHardware();  break;
+                case 5: displayComputers(); break;
+                case 6: buildComputers(); break;
+                case 7: manageUsers();      break;
+                case 8: System.out.println("Exiting..."); break;
+                default: System.out.println("Invalid Choice");
                 }
-        }while(choice != 6);
+        }while(choice != 8);
     }
     public static void addHardware(){
         int ch;
@@ -730,39 +834,76 @@ public class Main{
             System.out.println("Enter Choice: ");
             ch = sc.nextInt();
             switch(ch){
-                case 1:
-                    inventory.addCPU();
-                    break;
-                case 2:
-                    inventory.addGPU();
-                    break;
-                case 3:
-                    inventory.addRAM();
-                    break;
-                case 4:
-                    inventory.addSTRG();
-                    break;
-                case 5:
-                    inventory.addMB();
-                    break;
-                case 6:
-                    inventory.addPSU();
-                    break;
-                case 7:
-                    System.out.println();
-                    break;
-                default:
-                    System.out.println("Invalid Choice");
+                case 1: inventory.addCPU();     break;
+                case 2: inventory.addGPU();     break;
+                case 3: inventory.addRAM();     break;
+                case 4: inventory.addSTRG();    break;
+                case 5: inventory.addMB();      break;
+                case 6: inventory.addPSU();     break;
+                case 7: System.out.println();   break;
+                default: System.out.println("Invalid Choice");
                 }
         }while(ch != 6);
     }
     public static void editHardware(){
-
+        int ch;
+        do {
+            System.out.println("\n--- Edit Hardware ---");
+            System.out.println("Press 1 to Edit CPU");
+            System.out.println("Press 2 to Edit GPU");
+            System.out.println("Press 3 to Edit RAM");
+            System.out.println("Press 4 to Edit Storage");
+            System.out.println("Press 5 to Edit Motherboard");
+            System.out.println("Press 6 to Edit PSU");
+            System.out.println("Press 7 to Go Back");
+            System.out.print("Enter Choice: ");
+            ch = sc.nextInt();
+            sc.nextLine();
+            switch (ch) {
+                case 1: inventory.editCPU();     break;
+                case 2: inventory.editGPU();     break;
+                case 3: inventory.editRAM();     break;
+                case 4: inventory.editStorage(); break;
+                case 5: inventory.editMB();      break;
+                case 6: inventory.editPSU();     break;
+                case 7: System.out.println();    break;
+                default: System.out.println("Invalid Choice\n");
+            }
+        } while (ch != 7);
     }
     public static void delHardware(){
-
+        int ch;
+        do {
+            System.out.println("\n--- Delete Hardware ---");
+            System.out.println("Press 1 to Delete CPU");
+            System.out.println("Press 2 to Delete GPU");
+            System.out.println("Press 3 to Delete RAM");
+            System.out.println("Press 4 to Delete Storage");
+            System.out.println("Press 5 to Delete Motherboard");
+            System.out.println("Press 6 to Delete PSU");
+            System.out.println("Press 7 to Go Back");
+            System.out.print("Enter Choice: ");
+            ch = sc.nextInt();
+            sc.nextLine(); // flush
+            switch (ch) {
+                case 1: inventory.deleteCPU();     break;
+                case 2: inventory.deleteGPU();     break;
+                case 3: inventory.deleteRAM();     break;
+                case 4: inventory.deleteStorage(); break;
+                case 5: inventory.deleteMB();      break;
+                case 6: inventory.deletePSU();     break;
+                case 7: System.out.println();      break;
+                default: System.out.println("Invalid Choice\n");
+            }
+        } while (ch != 7);
     }
     public static void displayHardware(){
+        inventory.displayAllHardware();
+    }
+    public static void displayComputers(){
+        inventory.displayBuiltComputers();
+    }
+    public static void buildComputers(){
 
     }
     public static void manageUsers(){
