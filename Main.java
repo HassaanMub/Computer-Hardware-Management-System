@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 abstract class Hardware{
     protected int id;
@@ -704,6 +703,172 @@ class Inventory {
         MotherBoard removed = mbs.remove(choice - 1);
         System.out.println("Deleted: " + removed.brand + " " + removed.modelName + "\n");
     }
+    // Build Computer
+    public void buildComputer() {
+        System.out.println("\n--- Build a Computer ---");
+        if (cpus.isEmpty()) { 
+            System.out.println("No CPUs in Inventory. Cannot Build Computer.\n"); 
+            return; 
+        }
+        System.out.println("\n[Step 1 of 5] Select a CPU:");
+        for (int i = 0; i < cpus.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            cpus.get(i).display();
+        }
+        System.out.print("Enter CPU Number: ");
+        int cpuChoice = sc.nextInt(); sc.nextLine();
+        if (cpuChoice < 1 || cpuChoice > cpus.size()) { 
+            System.out.println("Invalid Selection. Build Cancelled.\n"); 
+            return; 
+        }
+        CPU selectedCPU = cpus.get(cpuChoice - 1);
+        if (gpus.isEmpty()) { 
+            System.out.println("No GPUs in Inventory. Cannot Build Computer.\n"); 
+            return; 
+        }
+        System.out.println("\n[Step 2 of 5] Select a GPU:");
+        for (int i = 0; i < gpus.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            gpus.get(i).display();
+        }
+        System.out.print("Enter GPU Number: ");
+        int gpuChoice = sc.nextInt(); sc.nextLine();
+        if (gpuChoice < 1 || gpuChoice > gpus.size()) { 
+            System.out.println("Invalid Selection. Build Cancelled.\n"); 
+            return; 
+        }
+        GPU selectedGPU = gpus.get(gpuChoice - 1);
+        if (rams.isEmpty()) { 
+            System.out.println("No RAM in Inventory. Cannot Build Computer.\n"); 
+            return; 
+        }
+        System.out.println("\n[Step 3 of 5] Select RAM:");
+        for (int i = 0; i < rams.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            rams.get(i).display();
+        }
+        System.out.print("Enter RAM Number: ");
+        int ramChoice = sc.nextInt(); sc.nextLine();
+        if (ramChoice < 1 || ramChoice > rams.size()) { 
+            System.out.println("Invalid Selection. Build Cancelled.\n"); 
+            return; 
+        }
+        RAM selectedRAM = rams.get(ramChoice - 1);
+        if (storage.isEmpty()) { 
+            System.out.println("No Storage in Inventory. Cannot Build Computer.\n"); 
+            return; 
+        }
+        System.out.println("\n[Step 4 of 5] Select Storage:");
+        for (int i = 0; i < storage.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            storage.get(i).display();
+        }
+        System.out.print("Enter Storage Number: ");
+        int strgChoice = sc.nextInt(); sc.nextLine();
+        if (strgChoice < 1 || strgChoice > storage.size()) { 
+            System.out.println("Invalid Selection. Build Cancelled.\n"); 
+            return; 
+        }
+        Storage selectedStorage = storage.get(strgChoice - 1);
+        if (psus.isEmpty()) { 
+            System.out.println("No PSUs in Inventory. Cannot Build Computer.\n"); 
+            return; 
+        }
+        System.out.println("\n[Step 5 of 5] Select a PSU:");
+        for (int i = 0; i < psus.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            psus.get(i).display();
+        }
+        System.out.print("Enter PSU Number: ");
+        int psuChoice = sc.nextInt(); sc.nextLine();
+        if (psuChoice < 1 || psuChoice > psus.size()) { 
+            System.out.println("Invalid Selection. Build Cancelled.\n"); 
+            return; }
+        PSU selectedPSU = psus.get(psuChoice - 1);
+        // Remove chosen parts from inventory 
+        cpus.remove(cpuChoice - 1);
+        gpus.remove(gpuChoice - 1);
+        rams.remove(ramChoice - 1);
+        storage.remove(strgChoice - 1);
+        psus.remove(psuChoice - 1);
+        Computer newPC = new Computer(selectedCPU, selectedGPU, selectedRAM, selectedStorage, selectedPSU);
+        builtComputers.add(newPC);
+        System.out.println("\nComputer Built Successfully! Here are its specs:");
+        newPC.displaySpecs();
+    }
+    // 
+    public void sellComputer(ArrayList<User> users) {
+        if (builtComputers.isEmpty()) {
+            System.out.println("No computers available in inventory to sell.\n");
+            return;
+        }
+        if (users.isEmpty()) {
+            System.out.println("No users found. Add a user first.\n");
+            return;
+        }
+        // Show computers
+        System.out.println("\n--- Available Computers ---");
+        for (int i = 0; i < builtComputers.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            builtComputers.get(i).displaySpecs();
+        }
+        System.out.print("Select Computer Number to Sell: ");
+        int compChoice = sc.nextInt(); 
+        sc.nextLine();
+        if (compChoice < 1 || compChoice > builtComputers.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        Computer selectedPC = builtComputers.get(compChoice - 1);
+        // Show users
+        System.out.println("\n--- User List ---");
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            users.get(i).displayUser();
+        }
+        System.out.print("Select User Number to Sell To: ");
+        int userChoice = sc.nextInt(); sc.nextLine();
+        if (userChoice < 1 || userChoice > users.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        User selectedUser = users.get(userChoice - 1);
+        // Warn if user already owns a computer
+        if (selectedUser.hasComputer()) {
+            System.out.println("Warning: " + selectedUser.name + " already owns Computer #"
+                + selectedUser.pc.id + ". They cannot own two computers.");
+            System.out.print("Cancel sale? (y/n): ");
+            String ans = sc.nextLine();
+            if (!ans.equalsIgnoreCase("n")) { System.out.println("Sale Cancelled.\n"); return; }
+        }
+        // Transfer: remove from inventory, assign to user
+        builtComputers.remove(compChoice - 1);
+        selectedUser.pc = selectedPC;
+        System.out.println("Computer #" + selectedPC.id + " sold to " + selectedUser.name + " successfully!\n");
+    }
+ 
+    // Buy a computer back from a user into inventory
+    public void buyComputer(ArrayList<User> users) {
+        if (users.isEmpty()) { System.out.println("No users found.\n"); return; }
+        // Filter to only users who own a computer
+        ArrayList<User> usersWithPC = new ArrayList<>();
+        for (User u : users) { if (u.hasComputer()) usersWithPC.add(u); }
+        if (usersWithPC.isEmpty()) { System.out.println("No users currently own a computer.\n"); return; }
+        System.out.println("\n--- Users With a Computer ---");
+        for (int i = 0; i < usersWithPC.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            usersWithPC.get(i).displayUser();
+        }
+        System.out.print("Select User Number to Buy Computer From: ");
+        int userChoice = sc.nextInt(); sc.nextLine();
+        if (userChoice < 1 || userChoice > usersWithPC.size()) { System.out.println("Invalid Selection.\n"); return; }
+        User selectedUser = usersWithPC.get(userChoice - 1);
+        Computer returnedPC = selectedUser.pc;
+        // Transfer: remove from user, add back to inventory
+        selectedUser.pc = null;
+        builtComputers.add(returnedPC);
+        System.out.println("Computer #" + returnedPC.id + " bought back from " + selectedUser.name + " and returned to inventory!\n");
+    }
     // Display Methods
     public void displayAllHardware(){
         // CPUs
@@ -751,38 +916,131 @@ class Inventory {
 }
 // USER CLASS
 class User{
-    private int userId;
-    private String name;
-    private Computer pc;
+    int userId;
+    String name;
+    Computer pc;
     static int nextUserId = 0;
-    // Constructor 1
+    // Constructor 
     public User(String name){
         this.userId = nextUserId++;
         this.name = name;
     }
-    // Constructor 2
-    public User(String name, Computer pc){
-        this.userId = nextUserId++;
-        this.name = name;
-        this.pc = pc;
+    // Check for Computer
+    public boolean hasComputer(){
+        return pc != null;
     }
+    // Display
     public void displayUser(){
-        System.out.println("ID: " + userId);
-        pc.displaySpecs();
-        System.out.println("User: " + name);
-        pc.displaySpecs();
-        System.out.println("Owned Computer;\n");
-        pc.displaySpecs();
+        System.out.println("----------");
+        System.out.println("User ID: " + userId);
+        System.out.println("Name: " + name);
+        if (pc != null) {
+            System.out.println("Owned Computer: Computer #" + pc.id);
+        } else {
+            System.out.println("Owned Computer: None");
+        }
+        System.out.println("----------");
+    }
+    public void displayUserFull(){
+        System.out.println("----------");
+        System.out.println("User ID: " + userId);
+        System.out.println("Name: " + name);
+        if (pc != null) {
+            System.out.println("Owned Computer:");
+            pc.displaySpecs();
+        } else {
+            System.out.println("Owned Computer: None");
+        }
+        System.out.println("----------");
     }
 }
+
+// File Handling
 class FileManager {
-    public static void saveUser(User user){
+    // FIle Names
+    static final String CPU_FILE = "cpus.txt";
+    static final String GPU_FILE = "gpus.txt";
+    static final String RAM_FILE = "rams.txt";
+    static final String STORAGE_FILE = "storage.txt";
+    static final String PSU_FILE = "psus.txt";
+    static final String MB_FILE = "mbs.txt";
+    static final String USER_FILE = "users.txt";
+    static final String BUILT_PC_FILE = "builtComputers.txt";
+
+    public static void createFile(String fileName){
         try {
-            FileWriter writer = new FileWriter("users.txt", true);
-            writer.write("User Saved\n");
-            writer.close();           
+            File file = new File(fileName);
+            if(!file.exists()){
+                file.createNewFile();
+                System.out.println(fileName + "Created!");
+            }
         } catch (IOException e) {
-            System.out.println("Error");
+            System.out.println("Error Creating File.");
+        }
+    }
+    public static void initializeFiles() { 
+        createFile(CPU_FILE); 
+        createFile(GPU_FILE); 
+        createFile(RAM_FILE); 
+        createFile(STORAGE_FILE); 
+        createFile(PSU_FILE); 
+        createFile(MB_FILE); 
+        createFile(USER_FILE); 
+    }
+    // Save CPU
+    public static void saveCPU(CPU cpu) { 
+        try { 
+            FileWriter writer = new FileWriter(CPU_FILE, true); 
+            writer.write("ID: " + cpu.id + "\n"); 
+            writer.write("Brand: " + cpu.brand + "\n"); 
+            writer.write("Model Name: " + cpu.modelName + "\n"); 
+            writer.write("Price: " + cpu.price + "\n"); 
+            writer.write("Cores: " + cpu.cores + "\n"); 
+            writer.write("Threads: " + cpu.threads + "\n"); 
+            writer.write("Clock Speed: " + cpu.clockSpeed + "\n"); 
+            writer.write("Cache: " + cpu.cache + "\n"); 
+            writer.write("TDP: " + cpu.tdp + "\n"); 
+            writer.write("Socket: " + cpu.socket + "\n"); 
+            writer.write("---\n"); 
+            writer.close(); 
+        } 
+        catch(IOException e) { 
+            System.out.println("Error Saving CPU."); 
+        } 
+    }
+    // LOAD CPU
+    public static void loadCPUs(ArrayList<CPU> cpus){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(CPU_FILE));
+            String line;
+            while((line = reader.readLine()) != null){
+                int id = Integer.parseInt(line.substring(4));
+                String brand = reader.readLine().substring(7);
+                String modelName = reader.readLine().substring(12);
+                double price = Double.parseDouble(reader.readLine().substring(7));
+                int cores = Integer.parseInt(reader.readLine().substring(7));
+                int threads = Integer.parseInt(reader.readLine().substring(9));
+                double clockSpeed = Integer.parseInt(reader.readLine().substring(13));
+                int cache = Integer.parseInt(reader.readLine().substring(7));
+                int tdp = Integer.parseInt(reader.readLine().substring(5));
+                String socket = reader.readLine().substring(8);
+                reader.readLine();
+                CPU cpu = new CPU(
+                    cores,
+                    threads,
+                    clockSpeed,
+                    cache,
+                    tdp,
+                    socket,
+                    brand,
+                    modelName,
+                    price
+                );
+                cpu.id = id;
+                cpus.add(cpu);
+            }
+        } catch (IOException e) {
+            System.out.println("Error Loading CPUs.");
         }
     }
 }
@@ -904,13 +1162,95 @@ public class Main{
         inventory.displayBuiltComputers();
     }
     public static void buildComputers(){
-
+        inventory.buildComputer();
+    }
+    // User Operations
+    public static void addUser() {
+        System.out.print("Enter User Name: ");
+        String name = sc.nextLine();
+        users.add(new User(name));
+        System.out.println("User \"" + name + "\" added successfully!\n");
+    }
+    public static void editUser() {
+        if (users.isEmpty()) { 
+            System.out.println("No Users Found.\n"); 
+            return; 
+        }
+        System.out.println("--- User List ---");
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            users.get(i).displayUser();
+        }
+        System.out.print("Select User Number to Edit: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > users.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        User user = users.get(choice - 1);
+        System.out.print("New Name (" + user.name + "): ");
+        String input = sc.nextLine();
+        if (!input.trim().isEmpty()) user.name = input;
+        System.out.println("User Updated Successfully!\n");
+    }
+    public static void deleteUser() {
+        if (users.isEmpty()) { 
+            System.out.println("No Users Found.\n"); 
+            return; 
+        }
+        System.out.println("--- User List ---");
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            users.get(i).displayUser();
+        }
+        System.out.print("Select User Number to Delete: ");
+        int choice = sc.nextInt(); sc.nextLine();
+        if (choice < 1 || choice > users.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
+        User removed = users.remove(choice - 1);
+        if (removed.hasComputer()) {
+            inventory.builtComputers.add(removed.pc);
+            System.out.println("Note: Computer #" + removed.pc.id + " Returned to Inventory.");
+        }
+        System.out.println("User \"" + removed.name + "\" deleted.\n");
+    }
+    public static void displayAllUsers() {
+        if (users.isEmpty()) { 
+            System.out.println("No Users Found.\n"); 
+            return; 
+        }
+        System.out.println("--- All Users ---");
+        for (User user : users) {
+            user.displayUserFull();
+        }
+        System.out.println();
     }
     public static void manageUsers(){
-
+        int ch;
+        do {
+            System.out.println("\n--- Manage Users ---");
+            System.out.println("Press 1 to Add User");
+            System.out.println("Press 2 to Edit User");
+            System.out.println("Press 3 to Delete User");
+            System.out.println("Press 4 to Display All Users");
+            System.out.println("Press 5 to Sell a Computer to a User");
+            System.out.println("Press 6 to Buy a Computer from a User");
+            System.out.println("Press 7 to Go Back");
+            System.out.print("Enter Choice: ");
+            ch = sc.nextInt();
+            sc.nextLine();
+            switch (ch) {
+                case 1: addUser();                      break;
+                case 2: editUser();                     break;
+                case 3: deleteUser();                   break;
+                case 4: displayAllUsers();              break;
+                case 5: inventory.sellComputer(users);  break;
+                case 6: inventory.buyComputer(users);   break;
+                case 7: System.out.println();           break;
+                default: System.out.println("Invalid Choice\n");
+            }
+        } while (ch != 7);
     }
 }
-
-
-
-
