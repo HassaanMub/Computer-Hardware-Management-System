@@ -1039,6 +1039,7 @@ class FileManager {
                 cpu.id = id;
                 cpus.add(cpu);
             }
+            reader.close();
         } catch (IOException e) {
             System.out.println("Error Loading CPUs.");
         }
