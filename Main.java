@@ -210,6 +210,7 @@ class Inventory {
         String brand, modelName, socket;
         int cores, threads, cache, tdp;
         double price, clockSpeed;
+        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -226,6 +227,7 @@ class Inventory {
         cache = sc.nextInt();
         System.out.println("Enter TDP: ");
         tdp = sc.nextInt();
+        sc.nextLine(); // Flush
         System.out.println("Enter Socket: ");
         socket = sc.nextLine();
         CPU cpu = new CPU(cores, threads, clockSpeed, cache, tdp, socket, brand, modelName, price);
@@ -235,6 +237,7 @@ class Inventory {
         String brand, modelName;
         int VRAM, cores, speed, tdp;
         double price;
+        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -256,6 +259,7 @@ class Inventory {
         String brand, modelName;
         int ramCapacity, speed, latency;
         double price;
+        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -275,12 +279,14 @@ class Inventory {
         String brand, modelName, type;
         int capacity;
         double price;
+        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
         modelName = sc.nextLine();
         System.out.println("Enter Price: ");
         price = sc.nextDouble();
+        sc.nextLine(); // Flush
         System.out.println("Enter Type: ");
         type = sc.nextLine();
         System.out.println("Enter Capacity: ");
@@ -294,6 +300,7 @@ class Inventory {
         double price;
         boolean isModular = false;
         boolean flagVar = false;
+        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -302,17 +309,18 @@ class Inventory {
         price = sc.nextDouble();
         System.out.println("Enter Watt: ");
         watt = sc.nextInt();
+        sc.nextLine(); // Flush
         System.out.println("Enter Efficiency Tier: ");
         efficiency = sc.nextLine();
         do{
             System.out.println("Is It Modular? (y/n): ");
             mod = sc.nextLine();
             if (mod.equalsIgnoreCase("y")){
-                isModular = false;
+                isModular = true;
                 flagVar = true;
             }
             else if (mod.equalsIgnoreCase("n")){
-                isModular = true;
+                isModular = false;
                 flagVar = true;
             }
             else{
@@ -326,12 +334,14 @@ class Inventory {
         String brand, modelName, socket;
         int ramSlot;
         double price;
+        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model: ");
         modelName = sc.nextLine();
         System.out.println("Enter Price: ");
         price = sc.nextDouble();
+        sc.nextLine(); // Flush
         System.out.println("Enter Socket: ");
         socket = sc.nextLine();
         System.out.println("Enter Ram Slots: ");
@@ -796,7 +806,7 @@ class Inventory {
         System.out.println("\nComputer Built Successfully! Here are its specs:");
         newPC.displaySpecs();
     }
-    // 
+    // Sell Computer To User
     public void sellComputer(ArrayList<User> users) {
         if (builtComputers.isEmpty()) {
             System.out.println("No computers available in inventory to sell.\n");
@@ -847,7 +857,7 @@ class Inventory {
         System.out.println("Computer #" + selectedPC.id + " sold to " + selectedUser.name + " successfully!\n");
     }
  
-    // Buy a computer back from a user into inventory
+    // Buy Computer From User
     public void buyComputer(ArrayList<User> users) {
         if (users.isEmpty()) { System.out.println("No users found.\n"); return; }
         // Filter to only users who own a computer
@@ -954,7 +964,6 @@ class User{
         System.out.println("----------");
     }
 }
-
 // File Handling
 class FileManager {
     // FIle Names
@@ -964,9 +973,10 @@ class FileManager {
     static final String STORAGE_FILE = "storage.txt";
     static final String PSU_FILE = "psus.txt";
     static final String MB_FILE = "mbs.txt";
-    static final String USER_FILE = "users.txt";
+    static final String USERS_FILE = "users.txt";
     static final String BUILT_PC_FILE = "builtComputers.txt";
 
+    // Create A File
     public static void createFile(String fileName){
         try {
             File file = new File(fileName);
@@ -978,6 +988,7 @@ class FileManager {
             System.out.println("Error Creating File.");
         }
     }
+    // Initialize Files
     public static void initializeFiles() { 
         createFile(CPU_FILE); 
         createFile(GPU_FILE); 
@@ -985,9 +996,10 @@ class FileManager {
         createFile(STORAGE_FILE); 
         createFile(PSU_FILE); 
         createFile(MB_FILE); 
-        createFile(USER_FILE); 
+        createFile(USERS_FILE); 
+        createFile(BUILT_PC_FILE); 
     }
-    // Save CPU
+    // Save CPUs
     public static void saveCPU(CPU cpu) { 
         try { 
             FileWriter writer = new FileWriter(CPU_FILE, true); 
@@ -1008,7 +1020,7 @@ class FileManager {
             System.out.println("Error Saving CPU."); 
         } 
     }
-    // LOAD CPU
+    // LOAD CPUs
     public static void loadCPUs(ArrayList<CPU> cpus){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(CPU_FILE));
@@ -1020,7 +1032,7 @@ class FileManager {
                 double price = Double.parseDouble(reader.readLine().substring(7));
                 int cores = Integer.parseInt(reader.readLine().substring(7));
                 int threads = Integer.parseInt(reader.readLine().substring(9));
-                double clockSpeed = Integer.parseInt(reader.readLine().substring(13));
+                double clockSpeed = Double.parseDouble(reader.readLine().substring(13));
                 int cache = Integer.parseInt(reader.readLine().substring(7));
                 int tdp = Integer.parseInt(reader.readLine().substring(5));
                 String socket = reader.readLine().substring(8);
@@ -1044,14 +1056,352 @@ class FileManager {
             System.out.println("Error Loading CPUs.");
         }
     }
+    // Save GPUs
+    public static void saveGPU(GPU gpu) {
+
+        createFile(GPU_FILE);
+
+        try {
+            FileWriter writer = new FileWriter(GPU_FILE, true);
+
+            writer.write("ID: " + gpu.id + "\n");
+            writer.write("Brand: " + gpu.brand + "\n");
+            writer.write("Model Name: " + gpu.modelName + "\n");
+            writer.write("Price: " + gpu.price + "\n");
+            writer.write("VRAM: " + gpu.VRAM + "\n");
+            writer.write("Cores: " + gpu.cores + "\n");
+            writer.write("Speed: " + gpu.speed + "\n");
+            writer.write("TDP: " + gpu.tdp + "\n");
+            writer.write("--------------------\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error Saving GPU.");
+        }
+    }
+    // Load GPUs
+    public static void loadGPUs(ArrayList<GPU> gpus) {
+
+        createFile(GPU_FILE);
+
+        try {
+            Scanner reader = new Scanner(new File(GPU_FILE));
+
+            while (reader.hasNextLine()) {
+
+                reader.nextLine();
+                String brand = reader.nextLine().substring(7);
+                String model = reader.nextLine().substring(12);
+                double price = Double.parseDouble(reader.nextLine().substring(7));
+                int vram = Integer.parseInt(reader.nextLine().substring(6));
+                int cores = Integer.parseInt(reader.nextLine().substring(7));
+                int speed = Integer.parseInt(reader.nextLine().substring(7));
+                int tdp = Integer.parseInt(reader.nextLine().substring(5));
+
+                reader.nextLine();
+
+                GPU gpu = new GPU(
+                    vram, cores, speed, tdp,
+                    brand, model, price
+                );
+
+                gpus.add(gpu);
+            }
+
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("Error Loading GPUs.");
+        }
+    }
+    // Save RAMs
+    public static void saveRAM(RAM ram) {
+
+        createFile(RAM_FILE);
+
+        try {
+            FileWriter writer = new FileWriter(RAM_FILE, true);
+
+            writer.write("ID: " + ram.id + "\n");
+            writer.write("Brand: " + ram.brand + "\n");
+            writer.write("Model Name: " + ram.modelName + "\n");
+            writer.write("Price: " + ram.price + "\n");
+            writer.write("Capacity: " + ram.ramCapacity + "\n");
+            writer.write("Speed: " + ram.speed + "\n");
+            writer.write("Latency: " + ram.latency + "\n");
+            writer.write("--------------------\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error Saving RAM.");
+        }
+    }
+    // Load RAMs
+    public static void loadRAMs(ArrayList<RAM> rams) {
+
+        createFile(RAM_FILE);
+
+        try {
+            Scanner reader = new Scanner(new File(RAM_FILE));
+
+            while (reader.hasNextLine()) {
+
+                reader.nextLine();
+                String brand = reader.nextLine().substring(7);
+                String model = reader.nextLine().substring(12);
+                double price = Double.parseDouble(reader.nextLine().substring(7));
+                int capacity = Integer.parseInt(reader.nextLine().substring(10));
+                int speed = Integer.parseInt(reader.nextLine().substring(7));
+                int latency = Integer.parseInt(reader.nextLine().substring(9));
+
+                reader.nextLine();
+
+                RAM ram = new RAM(
+                    capacity, speed, latency,
+                    brand, model, price
+                );
+
+                rams.add(ram);
+            }
+
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("Error Loading RAMs.");
+        }
+    }
+    // Save Storage
+    public static void saveStorage(Storage strg) {
+
+        createFile(STORAGE_FILE);
+
+        try {
+            FileWriter writer = new FileWriter(STORAGE_FILE, true);
+
+            writer.write("ID: " + strg.id + "\n");
+            writer.write("Brand: " + strg.brand + "\n");
+            writer.write("Model Name: " + strg.modelName + "\n");
+            writer.write("Price: " + strg.price + "\n");
+            writer.write("Type: " + strg.type + "\n");
+            writer.write("Capacity: " + strg.capacity + "\n");
+            writer.write("--------------------\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error Saving Storage.");
+        }
+    }
+    // Load Storage
+    public static void loadStorage(ArrayList<Storage> storage) {
+
+        createFile(STORAGE_FILE);
+
+        try {
+            Scanner reader = new Scanner(new File(STORAGE_FILE));
+
+            while (reader.hasNextLine()) {
+
+                reader.nextLine();
+                String brand = reader.nextLine().substring(7);
+                String model = reader.nextLine().substring(12);
+                double price = Double.parseDouble(reader.nextLine().substring(7));
+                String type = reader.nextLine().substring(6);
+                int capacity = Integer.parseInt(reader.nextLine().substring(10));
+
+                reader.nextLine();
+
+                Storage strg = new Storage(
+                    type, capacity,
+                    brand, model, price
+                );
+
+                storage.add(strg);
+            }
+
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("Error Loading Storage.");
+        }
+    }
+    // Save PSUs
+    public static void savePSU(PSU psu) {
+
+        createFile(PSU_FILE);
+
+        try {
+            FileWriter writer = new FileWriter(PSU_FILE, true);
+
+            writer.write("ID: " + psu.id + "\n");
+            writer.write("Brand: " + psu.brand + "\n");
+            writer.write("Model Name: " + psu.modelName + "\n");
+            writer.write("Price: " + psu.price + "\n");
+            writer.write("Watt: " + psu.watt + "\n");
+            writer.write("Efficiency: " + psu.efficiency + "\n");
+            writer.write("Modular: " + psu.isModular + "\n");
+            writer.write("--------------------\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error Saving PSU.");
+        }
+    }
+    // Load PSUs
+    public static void loadPSUs(ArrayList<PSU> psus) {
+
+        createFile(PSU_FILE);
+
+        try {
+            Scanner reader = new Scanner(new File(PSU_FILE));
+
+            while (reader.hasNextLine()) {
+
+                reader.nextLine();
+                String brand = reader.nextLine().substring(7);
+                String model = reader.nextLine().substring(12);
+                double price = Double.parseDouble(reader.nextLine().substring(7));
+                int watt = Integer.parseInt(reader.nextLine().substring(6));
+                String efficiency = reader.nextLine().substring(12);
+                boolean modular = Boolean.parseBoolean(reader.nextLine().substring(9));
+
+                reader.nextLine();
+
+                PSU psu = new PSU(
+                    watt, efficiency, modular,
+                    brand, model, price
+                );
+
+                psus.add(psu);
+            }
+
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("Error Loading PSUs.");
+        }
+    }
+    // Save MotherBoards
+    public static void saveMB(MotherBoard mb) {
+
+        createFile(MB_FILE);
+
+        try {
+            FileWriter writer = new FileWriter(MB_FILE, true);
+
+            writer.write("ID: " + mb.id + "\n");
+            writer.write("Brand: " + mb.brand + "\n");
+            writer.write("Model Name: " + mb.modelName + "\n");
+            writer.write("Price: " + mb.price + "\n");
+            writer.write("Socket: " + mb.socket + "\n");
+            writer.write("RAM Slots: " + mb.ramSlot + "\n");
+            writer.write("--------------------\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error Saving Motherboard.");
+        }
+    }
+    // Load MotherBoards
+    public static void loadMBs(ArrayList<MotherBoard> mbs) {
+
+        createFile(MB_FILE);
+
+        try {
+            Scanner reader = new Scanner(new File(MB_FILE));
+
+            while (reader.hasNextLine()) {
+
+                reader.nextLine();
+                String brand = reader.nextLine().substring(7);
+                String model = reader.nextLine().substring(12);
+                double price = Double.parseDouble(reader.nextLine().substring(7));
+                String socket = reader.nextLine().substring(8);
+                int ramSlots = Integer.parseInt(reader.nextLine().substring(11));
+
+                reader.nextLine();
+
+                MotherBoard mb = new MotherBoard(
+                    socket, ramSlots,
+                    brand, model, price
+                );
+
+                mbs.add(mb);
+            }
+
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("Error Loading Motherboards.");
+        }
+    }
+    // Save Users
+    public static void saveUser(User user) {
+
+        createFile(USERS_FILE);
+
+        try {
+            FileWriter writer = new FileWriter(USERS_FILE, true);
+
+            writer.write("User ID: " + user.userId + "\n");
+            writer.write("Name: " + user.name + "\n");
+
+            if (user.pc != null) {
+                writer.write("Computer ID: " + user.pc.id + "\n");
+            }
+            else {
+                writer.write("Computer ID: None\n");
+            }
+
+            writer.write("--------------------\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error Saving User.");
+        }
+    }
+    // Save Built Computers
+    public static void saveBuiltComputer(Computer pc) {
+
+        createFile(BUILT_PC_FILE);
+
+        try {
+            FileWriter writer = new FileWriter(BUILT_PC_FILE, true);
+
+            writer.write("Computer ID: " + pc.id + "\n");
+            writer.write("--------------------\n");
+
+            writer.close();
+
+        } catch (IOException e) {
+            System.out.println("Error Saving Built Computer.");
+        }
+    }
 }
 public class Main{
     static Scanner sc = new Scanner(System.in);
     static Inventory inventory = new Inventory();
     static ArrayList<User> users = new ArrayList<>();
-    public static void main(String[] args){
+    
+    public static void main(String[] args) {
+        // Initialize Files
+        FileManager.initializeFiles();
+        // Load Files
+        FileManager.loadCPUs(inventory.cpus);
+        FileManager.loadGPUs(inventory.gpus);
+        FileManager.loadRAMs(inventory.rams);
+        FileManager.loadStorage(inventory.storage);
+        FileManager.loadPSUs(inventory.psus);
+        FileManager.loadMBs(inventory.mbs);
+        // Load Menu
         menu();
     }
+    // Menu
     public static void menu(){
         int choice;
         do{
@@ -1060,12 +1410,13 @@ public class Main{
             System.out.println("Press 2 to Edit Hardware");
             System.out.println("Press 3 to Delete Hardware");
             System.out.println("Press 4 to Display Hardwares");
-            System.out.println("Press 5 to Display Computers");
-            System.out.println("Press 6 to Build Computer");
+            System.out.println("Press 5 to Display Built Computers");
+            System.out.println("Press 6 to Build a Computer");
             System.out.println("Press 7 to Manage Users");
             System.out.println("Press 8 to Exit");
             System.out.println("Enter Choice: ");
             choice = sc.nextInt();
+            sc.nextLine(); // Flush
             switch(choice){
                 case 1: addHardware();      break;
                 case 2: editHardware();     break;
@@ -1079,6 +1430,7 @@ public class Main{
                 }
         }while(choice != 8);
     }
+    // Adding Hardware
     public static void addHardware(){
         int ch;
         do{
@@ -1092,6 +1444,7 @@ public class Main{
             System.out.println("Press 7 to Go Back");
             System.out.println("Enter Choice: ");
             ch = sc.nextInt();
+            sc.nextLine(); // Flush
             switch(ch){
                 case 1: inventory.addCPU();     break;
                 case 2: inventory.addGPU();     break;
@@ -1102,8 +1455,9 @@ public class Main{
                 case 7: System.out.println();   break;
                 default: System.out.println("Invalid Choice");
                 }
-        }while(ch != 6);
+        }while(ch != 7);
     }
+    // Editing Hardware
     public static void editHardware(){
         int ch;
         do {
@@ -1117,7 +1471,7 @@ public class Main{
             System.out.println("Press 7 to Go Back");
             System.out.print("Enter Choice: ");
             ch = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Flush
             switch (ch) {
                 case 1: inventory.editCPU();     break;
                 case 2: inventory.editGPU();     break;
@@ -1130,6 +1484,7 @@ public class Main{
             }
         } while (ch != 7);
     }
+    // Delete Hardware
     public static void delHardware(){
         int ch;
         do {
@@ -1143,7 +1498,7 @@ public class Main{
             System.out.println("Press 7 to Go Back");
             System.out.print("Enter Choice: ");
             ch = sc.nextInt();
-            sc.nextLine(); // flush
+            sc.nextLine(); // Flush
             switch (ch) {
                 case 1: inventory.deleteCPU();     break;
                 case 2: inventory.deleteGPU();     break;
@@ -1156,22 +1511,27 @@ public class Main{
             }
         } while (ch != 7);
     }
+    // Display All Hardware
     public static void displayHardware(){
         inventory.displayAllHardware();
     }
+    // Display All Built Computers
     public static void displayComputers(){
         inventory.displayBuiltComputers();
     }
+    // Build A Computer
     public static void buildComputers(){
         inventory.buildComputer();
     }
-    // User Operations
+    // USER OPERATIONS
+    // Add User
     public static void addUser() {
         System.out.print("Enter User Name: ");
         String name = sc.nextLine();
         users.add(new User(name));
-        System.out.println("User \"" + name + "\" added successfully!\n");
+        System.out.println("User \"" + name + "\" Added Successfully!\n");
     }
+    // Edit User
     public static void editUser() {
         if (users.isEmpty()) { 
             System.out.println("No Users Found.\n"); 
@@ -1183,7 +1543,8 @@ public class Main{
             users.get(i).displayUser();
         }
         System.out.print("Select User Number to Edit: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > users.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -1194,6 +1555,7 @@ public class Main{
         if (!input.trim().isEmpty()) user.name = input;
         System.out.println("User Updated Successfully!\n");
     }
+    // Delete User
     public static void deleteUser() {
         if (users.isEmpty()) { 
             System.out.println("No Users Found.\n"); 
@@ -1205,7 +1567,8 @@ public class Main{
             users.get(i).displayUser();
         }
         System.out.print("Select User Number to Delete: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > users.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -1215,8 +1578,9 @@ public class Main{
             inventory.builtComputers.add(removed.pc);
             System.out.println("Note: Computer #" + removed.pc.id + " Returned to Inventory.");
         }
-        System.out.println("User \"" + removed.name + "\" deleted.\n");
+        System.out.println("User \"" + removed.name + "\" Deleted.\n");
     }
+    // Display Users
     public static void displayAllUsers() {
         if (users.isEmpty()) { 
             System.out.println("No Users Found.\n"); 
@@ -1228,6 +1592,7 @@ public class Main{
         }
         System.out.println();
     }
+    // Manage User Menu
     public static void manageUsers(){
         int ch;
         do {
@@ -1241,7 +1606,7 @@ public class Main{
             System.out.println("Press 7 to Go Back");
             System.out.print("Enter Choice: ");
             ch = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // Flush
             switch (ch) {
                 case 1: addUser();                      break;
                 case 2: editUser();                     break;
