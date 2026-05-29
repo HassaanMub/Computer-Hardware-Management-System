@@ -168,11 +168,11 @@ class MotherBoard extends Hardware{
 // COMPUTER CLASS
 class Computer {
     int id;
-    private CPU cpu;
-    private GPU gpu;
-    private RAM ram;
-    private Storage storage;
-    private PSU psu;
+    CPU cpu;
+    GPU gpu;
+    RAM ram;
+    Storage storage;
+    PSU psu;
     static int nextCompId = 0;
     public Computer(CPU cpu, GPU gpu, RAM ram,
         Storage storage, PSU psu) {
@@ -1340,46 +1340,337 @@ class FileManager {
         }
     }
     // Save Users
-    public static void saveUser(User user) {
-
+    public static void saveUsers(ArrayList<User> users) {
         createFile(USERS_FILE);
-
         try {
-            FileWriter writer = new FileWriter(USERS_FILE, true);
-
-            writer.write("User ID: " + user.userId + "\n");
-            writer.write("Name: " + user.name + "\n");
-
-            if (user.pc != null) {
-                writer.write("Computer ID: " + user.pc.id + "\n");
+            FileWriter writer = new FileWriter(USERS_FILE);
+            for(User user : users) {
+                writer.write("User ID: " + user.userId + "\n");
+                writer.write("Name: " + user.name + "\n");
+                // NO PC
+                if(user.pc == null) { writer.write("Has PC: false\n"); }
+                // HAS PC
+                else {
+                    writer.write("Has PC: true\n");
+                    Computer pc = user.pc;
+                    writer.write("Computer ID: " + pc.id + "\n");
+                    // CPU
+                    writer.write("CPU Brand: " + pc.cpu.brand + "\n");
+                    writer.write("CPU Model: " + pc.cpu.modelName + "\n");
+                    writer.write("CPU Price: " + pc.cpu.price + "\n");
+                    writer.write("CPU Cores: " + pc.cpu.cores + "\n");
+                    writer.write("CPU Threads: " + pc.cpu.threads + "\n");
+                    writer.write("CPU Clock Speed: " + pc.cpu.clockSpeed + "\n");
+                    writer.write("CPU Cache: " + pc.cpu.cache + "\n");
+                    writer.write("CPU TDP: " + pc.cpu.tdp + "\n");
+                    writer.write("CPU Socket: " + pc.cpu.socket + "\n");
+                    // GPU
+                    writer.write("GPU Brand: " + pc.gpu.brand + "\n");
+                    writer.write("GPU Model: " + pc.gpu.modelName + "\n");
+                    writer.write("GPU Price: " + pc.gpu.price + "\n");
+                    writer.write("GPU VRAM: " + pc.gpu.VRAM + "\n");
+                    writer.write("GPU Cores: " + pc.gpu.cores + "\n");
+                    writer.write("GPU Speed: " + pc.gpu.speed + "\n");
+                    writer.write("GPU TDP: " + pc.gpu.tdp + "\n");
+                    // RAM
+                    writer.write("RAM Brand: " + pc.ram.brand + "\n");
+                    writer.write("RAM Model: " + pc.ram.modelName + "\n");
+                    writer.write("RAM Price: " + pc.ram.price + "\n");
+                    writer.write("RAM Capacity: " + pc.ram.ramCapacity + "\n");
+                    writer.write("RAM Speed: " + pc.ram.speed + "\n");
+                    writer.write("RAM Latency: " + pc.ram.latency + "\n");
+                    // STORAGE
+                    writer.write("Storage Brand: " + pc.storage.brand + "\n");
+                    writer.write("Storage Model: " + pc.storage.modelName + "\n");
+                    writer.write("Storage Price: " + pc.storage.price + "\n");
+                    writer.write("Storage Type: " + pc.storage.type + "\n");
+                    writer.write("Storage Capacity: " + pc.storage.capacity + "\n");
+                    // PSU
+                    writer.write("PSU Brand: " + pc.psu.brand + "\n");
+                    writer.write("PSU Model: " + pc.psu.modelName + "\n");
+                    writer.write("PSU Price: " + pc.psu.price + "\n");
+                    writer.write("PSU Watt: " + pc.psu.watt + "\n");
+                    writer.write("PSU Efficiency: " + pc.psu.efficiency + "\n");
+                    writer.write("PSU Modular: " + pc.psu.isModular + "\n");
+                }
+                writer.write("--------------------\n");
             }
-            else {
-                writer.write("Computer ID: None\n");
-            }
-
-            writer.write("--------------------\n");
-
             writer.close();
-
-        } catch (IOException e) {
-            System.out.println("Error Saving User.");
+        } catch(IOException e) {
+            System.out.println("Error Saving Users.");
+        }
+    }
+    // Load Users
+    public static void loadUsers(ArrayList<User> users) {
+        createFile(USERS_FILE);
+        try {
+            Scanner reader = new Scanner(new File(USERS_FILE));
+            while(reader.hasNextLine()) {
+                int userId = Integer.parseInt(reader.nextLine().substring(9));
+                String name = reader.nextLine().substring(6);
+                boolean hasPC = Boolean.parseBoolean(reader.nextLine().substring(8));
+                User user = new User(name);
+                user.userId = userId;
+                // NO PC
+                if(!hasPC) { user.pc = null; }
+                // HAS PC
+                else {
+                    int pcId = Integer.parseInt(reader.nextLine().substring(13));
+                    // CPU
+                    String cpuBrand = reader.nextLine().substring(11);
+                    String cpuModel = reader.nextLine().substring(11);
+                    double cpuPrice = Double.parseDouble(reader.nextLine().substring(11));
+                    int cpuCores = Integer.parseInt(reader.nextLine().substring(11));
+                    int cpuThreads = Integer.parseInt(reader.nextLine().substring(13));
+                    double cpuClock = Double.parseDouble(reader.nextLine().substring(17));
+                    int cpuCache = Integer.parseInt(reader.nextLine().substring(11));
+                    int cpuTdp = Integer.parseInt(reader.nextLine().substring(9));
+                    String cpuSocket = reader.nextLine().substring(12);
+                    CPU cpu = new CPU(
+                        cpuCores,
+                        cpuThreads,
+                        cpuClock,
+                        cpuCache,
+                        cpuTdp,
+                        cpuSocket,
+                        cpuBrand,
+                        cpuModel,
+                        cpuPrice
+                    );
+                    // GPU
+                    String gpuBrand = reader.nextLine().substring(11);
+                    String gpuModel = reader.nextLine().substring(11);
+                    double gpuPrice = Double.parseDouble(reader.nextLine().substring(11));
+                    int gpuVRAM = Integer.parseInt(reader.nextLine().substring(10));
+                    int gpuCores = Integer.parseInt(reader.nextLine().substring(11));
+                    int gpuSpeed = Integer.parseInt(reader.nextLine().substring(11));
+                    int gpuTdp = Integer.parseInt(reader.nextLine().substring(9));
+                    GPU gpu = new GPU(
+                        gpuVRAM,
+                        gpuCores,
+                        gpuSpeed,
+                        gpuTdp,
+                        gpuBrand,
+                        gpuModel,
+                        gpuPrice
+                    );
+                    // RAM
+                    String ramBrand = reader.nextLine().substring(11);
+                    String ramModel = reader.nextLine().substring(11);
+                    double ramPrice = Double.parseDouble(reader.nextLine().substring(11));
+                    int ramCapacity = Integer.parseInt(reader.nextLine().substring(14));
+                    int ramSpeed = Integer.parseInt(reader.nextLine().substring(11));
+                    int ramLatency = Integer.parseInt(reader.nextLine().substring(14));
+                    RAM ram = new RAM(
+                        ramCapacity,
+                        ramSpeed,
+                        ramLatency,
+                        ramBrand,
+                        ramModel,
+                        ramPrice
+                    );
+                    // STORAGE
+                    String storageBrand = reader.nextLine().substring(15);
+                    String storageModel = reader.nextLine().substring(15);
+                    double storagePrice = Double.parseDouble(reader.nextLine().substring(15));
+                    String storageType = reader.nextLine().substring(14);
+                    int storageCapacity = Integer.parseInt(reader.nextLine().substring(18));
+                    Storage storage = new Storage(
+                        storageType,
+                        storageCapacity,
+                        storageBrand,
+                        storageModel,
+                        storagePrice
+                    );
+                    // PSU
+                    String psuBrand = reader.nextLine().substring(11);
+                    String psuModel = reader.nextLine().substring(11);
+                    double psuPrice = Double.parseDouble(reader.nextLine().substring(11));
+                    int psuWatt = Integer.parseInt(reader.nextLine().substring(10));
+                    String psuEfficiency = reader.nextLine().substring(16);
+                    boolean psuModular = Boolean.parseBoolean(
+                        reader.nextLine().substring(13)
+                    );
+                    PSU psu = new PSU(
+                        psuWatt,
+                        psuEfficiency,
+                        psuModular,
+                        psuBrand,
+                        psuModel,
+                        psuPrice
+                    );
+                    Computer pc = new Computer(
+                        cpu,
+                        gpu,
+                        ram,
+                        storage,
+                        psu
+                    );
+                    pc.id = pcId;
+                    user.pc = pc;
+                }
+                users.add(user);
+                reader.nextLine();
+            }
+            reader.close();
+        } catch(Exception e) {
+            System.out.println("Error Loading Users.");
         }
     }
     // Save Built Computers
-    public static void saveBuiltComputer(Computer pc) {
-
+    public static void saveBuiltComputers(ArrayList<Computer> builtComputers) {
         createFile(BUILT_PC_FILE);
-
         try {
-            FileWriter writer = new FileWriter(BUILT_PC_FILE, true);
-
-            writer.write("Computer ID: " + pc.id + "\n");
-            writer.write("--------------------\n");
-
+            FileWriter writer = new FileWriter(BUILT_PC_FILE);
+            for(Computer pc : builtComputers) {
+                writer.write("Computer ID: " + pc.id + "\n");
+                // CPU
+                writer.write("CPU Brand: " + pc.cpu.brand + "\n");
+                writer.write("CPU Model: " + pc.cpu.modelName + "\n");
+                writer.write("CPU Price: " + pc.cpu.price + "\n");
+                writer.write("CPU Cores: " + pc.cpu.cores + "\n");
+                writer.write("CPU Threads: " + pc.cpu.threads + "\n");
+                writer.write("CPU Clock Speed: " + pc.cpu.clockSpeed + "\n");
+                writer.write("CPU Cache: " + pc.cpu.cache + "\n");
+                writer.write("CPU TDP: " + pc.cpu.tdp + "\n");
+                writer.write("CPU Socket: " + pc.cpu.socket + "\n");
+                // GPU
+                writer.write("GPU Brand: " + pc.gpu.brand + "\n");
+                writer.write("GPU Model: " + pc.gpu.modelName + "\n");
+                writer.write("GPU Price: " + pc.gpu.price + "\n");
+                writer.write("GPU VRAM: " + pc.gpu.VRAM + "\n");
+                writer.write("GPU Cores: " + pc.gpu.cores + "\n");
+                writer.write("GPU Speed: " + pc.gpu.speed + "\n");
+                writer.write("GPU TDP: " + pc.gpu.tdp + "\n");
+                // RAM
+                writer.write("RAM Brand: " + pc.ram.brand + "\n");
+                writer.write("RAM Model: " + pc.ram.modelName + "\n");
+                writer.write("RAM Price: " + pc.ram.price + "\n");
+                writer.write("RAM Capacity: " + pc.ram.ramCapacity + "\n");
+                writer.write("RAM Speed: " + pc.ram.speed + "\n");
+                writer.write("RAM Latency: " + pc.ram.latency + "\n");
+                // STORAGE
+                writer.write("Storage Brand: " + pc.storage.brand + "\n");
+                writer.write("Storage Model: " + pc.storage.modelName + "\n");
+                writer.write("Storage Price: " + pc.storage.price + "\n");
+                writer.write("Storage Type: " + pc.storage.type + "\n");
+                writer.write("Storage Capacity: " + pc.storage.capacity + "\n");
+                // PSU
+                writer.write("PSU Brand: " + pc.psu.brand + "\n");
+                writer.write("PSU Model: " + pc.psu.modelName + "\n");
+                writer.write("PSU Price: " + pc.psu.price + "\n");
+                writer.write("PSU Watt: " + pc.psu.watt + "\n");
+                writer.write("PSU Efficiency: " + pc.psu.efficiency + "\n");
+                writer.write("PSU Modular: " + pc.psu.isModular + "\n");
+                writer.write("--------------------\n");
+            }
             writer.close();
-
-        } catch (IOException e) {
-            System.out.println("Error Saving Built Computer.");
+        } catch(IOException e) {
+            System.out.println("Error Saving Built Computers.");
+        }
+    }
+    // Load Built Computers
+    public static void loadBuiltComputers(ArrayList<Computer> builtComputers) {
+        createFile(BUILT_PC_FILE);
+        try {
+            Scanner reader = new Scanner(new File(BUILT_PC_FILE));
+            while(reader.hasNextLine()) {
+                int pcId = Integer.parseInt(reader.nextLine().substring(13));
+                // CPU
+                String cpuBrand = reader.nextLine().substring(11);
+                String cpuModel = reader.nextLine().substring(11);
+                double cpuPrice = Double.parseDouble(reader.nextLine().substring(11));
+                int cpuCores = Integer.parseInt(reader.nextLine().substring(11));
+                int cpuThreads = Integer.parseInt(reader.nextLine().substring(13));
+                double cpuClock = Double.parseDouble(reader.nextLine().substring(17));
+                int cpuCache = Integer.parseInt(reader.nextLine().substring(11));
+                int cpuTdp = Integer.parseInt(reader.nextLine().substring(9));
+                String cpuSocket = reader.nextLine().substring(12);
+                CPU cpu = new CPU(
+                    cpuCores,
+                    cpuThreads,
+                    cpuClock,
+                    cpuCache,
+                    cpuTdp,
+                    cpuSocket,
+                    cpuBrand,
+                    cpuModel,
+                    cpuPrice
+                );
+                // GPU
+                String gpuBrand = reader.nextLine().substring(11);
+                String gpuModel = reader.nextLine().substring(11);
+                double gpuPrice = Double.parseDouble(reader.nextLine().substring(11));
+                int gpuVRAM = Integer.parseInt(reader.nextLine().substring(10));
+                int gpuCores = Integer.parseInt(reader.nextLine().substring(11));
+                int gpuSpeed = Integer.parseInt(reader.nextLine().substring(11));
+                int gpuTdp = Integer.parseInt(reader.nextLine().substring(9));
+                GPU gpu = new GPU(
+                    gpuVRAM,
+                    gpuCores,
+                    gpuSpeed,
+                    gpuTdp,
+                    gpuBrand,
+                    gpuModel,
+                    gpuPrice
+                );
+                // RAM
+                String ramBrand = reader.nextLine().substring(11);
+                String ramModel = reader.nextLine().substring(11);
+                double ramPrice = Double.parseDouble(reader.nextLine().substring(11));
+                int ramCapacity = Integer.parseInt(reader.nextLine().substring(14));
+                int ramSpeed = Integer.parseInt(reader.nextLine().substring(11));
+                int ramLatency = Integer.parseInt(reader.nextLine().substring(14));
+                RAM ram = new RAM(
+                    ramCapacity,
+                    ramSpeed,
+                    ramLatency,
+                    ramBrand,
+                    ramModel,
+                    ramPrice
+                );
+                // STORAGE
+                String storageBrand = reader.nextLine().substring(15);
+                String storageModel = reader.nextLine().substring(15);
+                double storagePrice = Double.parseDouble(reader.nextLine().substring(15));
+                String storageType = reader.nextLine().substring(14);
+                int storageCapacity = Integer.parseInt(reader.nextLine().substring(18));
+                Storage storage = new Storage(
+                    storageType,
+                    storageCapacity,
+                    storageBrand,
+                    storageModel,
+                    storagePrice
+                );
+                // PSU
+                String psuBrand = reader.nextLine().substring(11);
+                String psuModel = reader.nextLine().substring(11);
+                double psuPrice = Double.parseDouble(reader.nextLine().substring(11));
+                int psuWatt = Integer.parseInt(reader.nextLine().substring(10));
+                String psuEfficiency = reader.nextLine().substring(16);
+                boolean psuModular = Boolean.parseBoolean(reader.nextLine().substring(13));
+                PSU psu = new PSU(
+                    psuWatt,
+                    psuEfficiency,
+                    psuModular,
+                    psuBrand,
+                    psuModel,
+                    psuPrice
+                );
+                Computer pc = new Computer(
+                    cpu,
+                    gpu,
+                    ram,
+                    storage,
+                    psu
+                );
+                pc.id = pcId;
+                builtComputers.add(pc);
+                reader.nextLine();
+            }
+            reader.close();
+        } catch(Exception e) {
+            System.out.println("Error Loading Built Computers!");
         }
     }
 }
