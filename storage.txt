@@ -1,0 +1,21 @@
+ID: 0
+Brand: Kingston
+Model Name: NV2 NVMe
+Price: 20499.0
+Type: SSD M.2
+Capacity: 1000
+--------------------
+ID: 1
+Brand: Seagate
+Model Name: BarraCuda
+Price: 42000.0
+Type: HDD SATA III
+Capacity: 2000
+--------------------
+ID: 2
+Brand: Western Digital
+Model Name: Blue WD10
+Price: 15500.0
+Type: HDD SATA III
+Capacity: 1000
+--------------------

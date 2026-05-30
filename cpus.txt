@@ -1,0 +1,44 @@
+ID: 0
+Brand: AMD
+Model Name: Ryzen 5 8400F
+Price: 31999.0
+Cores: 6
+Threads: 12
+Clock Speed: 4.2
+Cache: 16
+TDP: 65
+Socket: AM5
+--------------------
+ID: 1
+Brand: Intel
+Model Name: Core i5 12400F
+Price: 41999.0
+Cores: 6
+Threads: 12
+Clock Speed: 4.4
+Cache: 18
+TDP: 65
+Socket: LGA 1700
+--------------------
+ID: 2
+Brand: AMD
+Model Name: Ryzen 7 9800X3D
+Price: 128999.0
+Cores: 8
+Threads: 16
+Clock Speed: 5.2
+Cache: 104
+TDP: 120
+Socket: AM5
+--------------------
+ID: 3
+Brand: Intel
+Model Name: Core i9 14900K 
+Price: 139999.0
+Cores: 24
+Threads: 32
+Clock Speed: 6.0
+Cache: 36
+TDP: 125
+Socket: LGA 1700
+--------------------

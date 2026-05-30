@@ -1,0 +1,45 @@
+ID: 0
+Brand: AMD
+Model Name: RX 6600 XT
+Price: 65000.0
+VRAM: 8
+Cores: 2048
+Speed: 2359
+TDP: 160
+--------------------
+ID: 1
+Brand: Nvidia
+Model Name: RTX 5090
+Price: 1350000.0
+VRAM: 32
+Cores: 21760
+Speed: 2017
+TDP: 575
+--------------------
+ID: 2
+Brand: AMD
+Model Name: RX 590
+Price: 24500.0
+VRAM: 8
+Cores: 2304
+Speed: 1469
+TDP: 175
+--------------------
+ID: 3
+Brand: Nvidia
+Model Name: GTX 750
+Price: 12500.0
+VRAM: 2
+Cores: 512
+Speed: 1020
+TDP: 55
+--------------------
+ID: 4
+Brand: Nvidia
+Model Name: RTX 2060 SUPER
+Price: 65500.0
+VRAM: 8
+Cores: 2176
+Speed: 1470
+TDP: 175
+--------------------

@@ -42,9 +42,9 @@ class CPU extends Hardware{
         System.out.println("Cores: " + cores);
         System.out.println("Threads: " + threads);
         System.out.println("Socket: " + socket);
-        System.out.println("Clock Speed: " + clockSpeed + "GHz");
-        System.out.println("Cache: " + cache + "MB");
-        System.out.println("TDP: " + tdp + "W");
+        System.out.println("Clock Speed: " + clockSpeed + " GHz");
+        System.out.println("Cache: " + cache + " MB");
+        System.out.println("TDP: " + tdp + " W");
         System.out.println("Price: Rs" + price);
         System.out.println("----------");
     }
@@ -68,10 +68,10 @@ class GPU extends Hardware{
         System.out.println("ID: " + id);
         System.out.println("Brand: " + brand);
         System.out.println("Model Name: " + modelName);
-        System.out.println("VRAM: " + VRAM + "GB");
+        System.out.println("VRAM: " + VRAM + " GB");
         System.out.println("Cores: " + cores);
-        System.out.println("Clock Speed: " + speed + "MHz");
-        System.out.println("TDP: " + tdp + "W");
+        System.out.println("Clock Speed: " + speed + " MHz");
+        System.out.println("TDP: " + tdp + " W");
         System.out.println("Price: Rs" + price);
         System.out.println("----------");
     }
@@ -93,8 +93,8 @@ class RAM extends Hardware{
         System.out.println("ID: " + id);
         System.out.println("Brand: " + brand);
         System.out.println("Model Name: " + modelName);
-        System.out.println("RAM Capacity: " + ramCapacity + "GB");
-        System.out.println("Speed: " + speed + "Mhz");
+        System.out.println("RAM Capacity: " + ramCapacity + " GB");
+        System.out.println("Speed: " + speed + " Mhz");
         System.out.println("Latency: CL" + latency);
         System.out.println("Price: Rs" + price);
         System.out.println("----------");
@@ -116,7 +116,7 @@ class Storage extends Hardware{
         System.out.println("Brand: " + brand);
         System.out.println("Model Name: " + modelName);
         System.out.println("Type: " + type);
-        System.out.println("Memory Capacity: " + capacity + "GB");
+        System.out.println("Memory Capacity: " + capacity + " GB");
         System.out.println("Price: Rs" + price);
         System.out.println("----------");
     }
@@ -138,7 +138,7 @@ class PSU extends Hardware{
         System.out.println("ID: " + id);
         System.out.println("Brand: " + brand);
         System.out.println("Model Name: " + modelName);
-        System.out.println("Watts: " + watt + "W");
+        System.out.println("Watts: " + watt + " W");
         System.out.println("Efficiency: 80 Plus " + efficiency);
         System.out.println("Price: Rs" + price);
         System.out.println("----------");
@@ -210,7 +210,6 @@ class Inventory {
         String brand, modelName, socket;
         int cores, threads, cache, tdp;
         double price, clockSpeed;
-        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -237,7 +236,6 @@ class Inventory {
         String brand, modelName;
         int VRAM, cores, speed, tdp;
         double price;
-        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -252,6 +250,7 @@ class Inventory {
         speed = sc.nextInt();
         System.out.println("Enter TDP: ");
         tdp = sc.nextInt();
+        sc.nextLine(); // Flush
         GPU gpu = new GPU(VRAM, cores, speed, tdp, brand, modelName, price);
         gpus.add(gpu);
     }
@@ -259,7 +258,6 @@ class Inventory {
         String brand, modelName;
         int ramCapacity, speed, latency;
         double price;
-        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -272,6 +270,7 @@ class Inventory {
         speed = sc.nextInt();
         System.out.println("Enter Latency (CL): ");
         latency = sc.nextInt();
+        sc.nextLine(); // Flush
         RAM ram = new RAM(ramCapacity, speed, latency, brand, modelName, price);
         rams.add(ram);
     }
@@ -279,7 +278,6 @@ class Inventory {
         String brand, modelName, type;
         int capacity;
         double price;
-        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -291,6 +289,7 @@ class Inventory {
         type = sc.nextLine();
         System.out.println("Enter Capacity: ");
         capacity = sc.nextInt();
+        sc.nextLine(); // Flush
         Storage strg = new Storage(type, capacity, brand, modelName, price);
         storage.add(strg);
     }
@@ -300,7 +299,6 @@ class Inventory {
         double price;
         boolean isModular = false;
         boolean flagVar = false;
-        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model Name: ");
@@ -334,7 +332,6 @@ class Inventory {
         String brand, modelName, socket;
         int ramSlot;
         double price;
-        sc.nextLine(); // Flush
         System.out.println("Enter Brand: ");
         brand = sc.nextLine();
         System.out.println("Enter Model: ");
@@ -346,6 +343,7 @@ class Inventory {
         socket = sc.nextLine();
         System.out.println("Enter Ram Slots: ");
         ramSlot = sc.nextInt();
+        sc.nextLine(); // Flush
         MotherBoard mb = new MotherBoard(socket, ramSlot, brand, modelName, price);
         mbs.add(mb);
     }
@@ -856,7 +854,6 @@ class Inventory {
         selectedUser.pc = selectedPC;
         System.out.println("Computer #" + selectedPC.id + " sold to " + selectedUser.name + " successfully!\n");
     }
- 
     // Buy Computer From User
     public void buyComputer(ArrayList<User> users) {
         if (users.isEmpty()) { System.out.println("No users found.\n"); return; }
@@ -883,44 +880,73 @@ class Inventory {
     public void displayAllHardware(){
         // CPUs
         System.out.println("--- CPUs ---\n");
-        for(CPU cpu : cpus){
-            cpu.display();
-            System.out.println();
+        if (cpus.isEmpty()){
+            System.out.println("No CPUs Available!\n");
+        }
+        else{
+            for(CPU cpu : cpus){
+                cpu.display();
+                System.out.println();
+            }
         }
         // GPUs
         System.out.println("--- GPUs ---\n");
-        for(GPU gpu : gpus){
-            gpu.display();
-            System.out.println();
+        if (gpus.isEmpty()){
+            System.out.println("No GPUs Available!\n");
+        } else {
+            for(GPU gpu : gpus){
+                gpu.display();
+                System.out.println();
+            }
         }
         // Storage
         System.out.println("--- Storage ---\n");
-        for(Storage strg : storage){
-            strg.display();
-            System.out.println();
+        if (storage.isEmpty()){
+            System.out.println("No Storage Available!\n");
+        } else {
+            for(Storage strg : storage){
+                strg.display();
+                System.out.println();
+            }
         }
         // RAM
         System.out.println("--- RAM ---\n");
-        for(RAM ram : rams){
-            ram.display();
-            System.out.println();
+        if (rams.isEmpty()){
+            System.out.println("No RAMs Available!\n");
+        } else {
+            for(RAM ram : rams){
+                ram.display();
+                System.out.println();
+            }
         }
         // Motherboards
         System.out.println("--- Motherboards ---\n");
-        for(MotherBoard mb : mbs){
-            mb.display();
-            System.out.println();
+        if (mbs.isEmpty()){
+            System.out.println("No Motherboards Available!\n");
+        } else {
+            for(MotherBoard mb : mbs){
+                mb.display();
+                System.out.println();
+            }
         }
         // PSUs
         System.out.println("--- PSUs ---\n");
-        for(PSU psu : psus){
-            psu.display();
-            System.out.println();
+        if (psus.isEmpty()){
+            System.out.println("No PSUs Available!\n");
+        } else {
+            for(PSU psu : psus){
+                psu.display();
+                System.out.println();
+            }
         }
     }
     public void displayBuiltComputers(){
-        for(Computer computer : builtComputers){
-            computer.displaySpecs();
+        if (builtComputers.isEmpty()){
+            System.out.println("No Built Computers Available!\n");
+        } else{
+            for(Computer computer : builtComputers){
+                computer.displaySpecs();
+            }
         }
     }
 }
@@ -976,6 +1002,7 @@ class FileManager {
     static final String USERS_FILE = "users.txt";
     static final String BUILT_PC_FILE = "builtComputers.txt";
 
+    // Change Save Methods to Overwrite Methods
     // Create A File
     public static void createFile(String fileName){
         try {
@@ -1000,25 +1027,27 @@ class FileManager {
         createFile(BUILT_PC_FILE); 
     }
     // Save CPUs
-    public static void saveCPU(CPU cpu) { 
-        try { 
-            FileWriter writer = new FileWriter(CPU_FILE, true); 
-            writer.write("ID: " + cpu.id + "\n"); 
-            writer.write("Brand: " + cpu.brand + "\n"); 
-            writer.write("Model Name: " + cpu.modelName + "\n"); 
-            writer.write("Price: " + cpu.price + "\n"); 
-            writer.write("Cores: " + cpu.cores + "\n"); 
-            writer.write("Threads: " + cpu.threads + "\n"); 
-            writer.write("Clock Speed: " + cpu.clockSpeed + "\n"); 
-            writer.write("Cache: " + cpu.cache + "\n"); 
-            writer.write("TDP: " + cpu.tdp + "\n"); 
-            writer.write("Socket: " + cpu.socket + "\n"); 
-            writer.write("---\n"); 
-            writer.close(); 
-        } 
-        catch(IOException e) { 
-            System.out.println("Error Saving CPU."); 
-        } 
+    public static void saveCPUs(ArrayList<CPU> cpus) {
+        createFile(CPU_FILE);
+        try {
+            FileWriter writer = new FileWriter(CPU_FILE);
+            for(CPU cpu : cpus) {
+                writer.write("ID: " + cpu.id + "\n");
+                writer.write("Brand: " + cpu.brand + "\n");
+                writer.write("Model Name: " + cpu.modelName + "\n");
+                writer.write("Price: " + cpu.price + "\n");
+                writer.write("Cores: " + cpu.cores + "\n");
+                writer.write("Threads: " + cpu.threads + "\n");
+                writer.write("Clock Speed: " + cpu.clockSpeed + "\n");
+                writer.write("Cache: " + cpu.cache + "\n");
+                writer.write("TDP: " + cpu.tdp + "\n");
+                writer.write("Socket: " + cpu.socket + "\n");
+                writer.write("--------------------\n");
+            }
+            writer.close();
+        } catch(IOException e) {
+            System.out.println("Error Saving CPUs.");
+        }
     }
     // LOAD CPUs
     public static void loadCPUs(ArrayList<CPU> cpus){
@@ -1057,27 +1086,24 @@ class FileManager {
         }
     }
     // Save GPUs
-    public static void saveGPU(GPU gpu) {
-
+    public static void saveGPUs(ArrayList<GPU> gpus) {
         createFile(GPU_FILE);
-
         try {
-            FileWriter writer = new FileWriter(GPU_FILE, true);
-
-            writer.write("ID: " + gpu.id + "\n");
-            writer.write("Brand: " + gpu.brand + "\n");
-            writer.write("Model Name: " + gpu.modelName + "\n");
-            writer.write("Price: " + gpu.price + "\n");
-            writer.write("VRAM: " + gpu.VRAM + "\n");
-            writer.write("Cores: " + gpu.cores + "\n");
-            writer.write("Speed: " + gpu.speed + "\n");
-            writer.write("TDP: " + gpu.tdp + "\n");
-            writer.write("--------------------\n");
-
+            FileWriter writer = new FileWriter(GPU_FILE);
+            for(GPU gpu : gpus) {
+                writer.write("ID: " + gpu.id + "\n");
+                writer.write("Brand: " + gpu.brand + "\n");
+                writer.write("Model Name: " + gpu.modelName + "\n");
+                writer.write("Price: " + gpu.price + "\n");
+                writer.write("VRAM: " + gpu.VRAM + "\n");
+                writer.write("Cores: " + gpu.cores + "\n");
+                writer.write("Speed: " + gpu.speed + "\n");
+                writer.write("TDP: " + gpu.tdp + "\n");
+                writer.write("--------------------\n");
+            }
             writer.close();
-
-        } catch (IOException e) {
-            System.out.println("Error Saving GPU.");
+        } catch(IOException e) {
+            System.out.println("Error Saving GPUs.");
         }
     }
     // Load GPUs
@@ -1116,26 +1142,23 @@ class FileManager {
         }
     }
     // Save RAMs
-    public static void saveRAM(RAM ram) {
-
+    public static void saveRAMs(ArrayList<RAM> rams) {
         createFile(RAM_FILE);
-
         try {
-            FileWriter writer = new FileWriter(RAM_FILE, true);
-
-            writer.write("ID: " + ram.id + "\n");
-            writer.write("Brand: " + ram.brand + "\n");
-            writer.write("Model Name: " + ram.modelName + "\n");
-            writer.write("Price: " + ram.price + "\n");
-            writer.write("Capacity: " + ram.ramCapacity + "\n");
-            writer.write("Speed: " + ram.speed + "\n");
-            writer.write("Latency: " + ram.latency + "\n");
-            writer.write("--------------------\n");
-
+            FileWriter writer = new FileWriter(RAM_FILE);
+            for (RAM ram : rams) {
+                writer.write("ID: " + ram.id + "\n");
+                writer.write("Brand: " + ram.brand + "\n");
+                writer.write("Model Name: " + ram.modelName + "\n");
+                writer.write("Price: " + ram.price + "\n");
+                writer.write("Capacity: " + ram.ramCapacity + "\n");
+                writer.write("Speed: " + ram.speed + "\n");
+                writer.write("Latency: " + ram.latency + "\n");
+                writer.write("--------------------\n");
+            }
             writer.close();
-
         } catch (IOException e) {
-            System.out.println("Error Saving RAM.");
+            System.out.println("Error Saving RAMs.");
         }
     }
     // Load RAMs
@@ -1173,23 +1196,20 @@ class FileManager {
         }
     }
     // Save Storage
-    public static void saveStorage(Storage strg) {
-
+    public static void saveStorages(ArrayList<Storage> storages) {
         createFile(STORAGE_FILE);
-
         try {
-            FileWriter writer = new FileWriter(STORAGE_FILE, true);
-
-            writer.write("ID: " + strg.id + "\n");
-            writer.write("Brand: " + strg.brand + "\n");
-            writer.write("Model Name: " + strg.modelName + "\n");
-            writer.write("Price: " + strg.price + "\n");
-            writer.write("Type: " + strg.type + "\n");
-            writer.write("Capacity: " + strg.capacity + "\n");
-            writer.write("--------------------\n");
-
+            FileWriter writer = new FileWriter(STORAGE_FILE);
+            for (Storage storage : storages) {
+                writer.write("ID: " + storage.id + "\n");
+                writer.write("Brand: " + storage.brand + "\n");
+                writer.write("Model Name: " + storage.modelName + "\n");
+                writer.write("Price: " + storage.price + "\n");
+                writer.write("Type: " + storage.type + "\n");
+                writer.write("Capacity: " + storage.capacity + "\n");
+                writer.write("--------------------\n");
+            }
             writer.close();
-
         } catch (IOException e) {
             System.out.println("Error Saving Storage.");
         }
@@ -1228,26 +1248,23 @@ class FileManager {
         }
     }
     // Save PSUs
-    public static void savePSU(PSU psu) {
-
+    public static void savePSUs(ArrayList<PSU> psus) {
         createFile(PSU_FILE);
-
         try {
-            FileWriter writer = new FileWriter(PSU_FILE, true);
-
-            writer.write("ID: " + psu.id + "\n");
-            writer.write("Brand: " + psu.brand + "\n");
-            writer.write("Model Name: " + psu.modelName + "\n");
-            writer.write("Price: " + psu.price + "\n");
-            writer.write("Watt: " + psu.watt + "\n");
-            writer.write("Efficiency: " + psu.efficiency + "\n");
-            writer.write("Modular: " + psu.isModular + "\n");
-            writer.write("--------------------\n");
-
+            FileWriter writer = new FileWriter(PSU_FILE);
+            for (PSU psu : psus) {
+                writer.write("ID: " + psu.id + "\n");
+                writer.write("Brand: " + psu.brand + "\n");
+                writer.write("Model Name: " + psu.modelName + "\n");
+                writer.write("Price: " + psu.price + "\n");
+                writer.write("Watt: " + psu.watt + "\n");
+                writer.write("Efficiency: " + psu.efficiency + "\n");
+                writer.write("Modular: " + psu.isModular + "\n");
+                writer.write("--------------------\n");
+            }
             writer.close();
-
         } catch (IOException e) {
-            System.out.println("Error Saving PSU.");
+            System.out.println("Error Saving PSUs.");
         }
     }
     // Load PSUs
@@ -1285,25 +1302,22 @@ class FileManager {
         }
     }
     // Save MotherBoards
-    public static void saveMB(MotherBoard mb) {
-
+    public static void saveMBs(ArrayList<MotherBoard> mbs) {
         createFile(MB_FILE);
-
         try {
-            FileWriter writer = new FileWriter(MB_FILE, true);
-
-            writer.write("ID: " + mb.id + "\n");
-            writer.write("Brand: " + mb.brand + "\n");
-            writer.write("Model Name: " + mb.modelName + "\n");
-            writer.write("Price: " + mb.price + "\n");
-            writer.write("Socket: " + mb.socket + "\n");
-            writer.write("RAM Slots: " + mb.ramSlot + "\n");
-            writer.write("--------------------\n");
-
+            FileWriter writer = new FileWriter(MB_FILE);
+            for (MotherBoard mb : mbs) {
+                writer.write("ID: " + mb.id + "\n");
+                writer.write("Brand: " + mb.brand + "\n");
+                writer.write("Model Name: " + mb.modelName + "\n");
+                writer.write("Price: " + mb.price + "\n");
+                writer.write("Socket: " + mb.socket + "\n");
+                writer.write("RAM Slots: " + mb.ramSlot + "\n");
+                writer.write("--------------------\n");
+            }
             writer.close();
-
         } catch (IOException e) {
-            System.out.println("Error Saving Motherboard.");
+            System.out.println("Error Saving Motherboards.");
         }
     }
     // Load MotherBoards
@@ -1689,6 +1703,8 @@ public class Main{
         FileManager.loadStorage(inventory.storage);
         FileManager.loadPSUs(inventory.psus);
         FileManager.loadMBs(inventory.mbs);
+        FileManager.loadUsers(users);
+        FileManager.loadBuiltComputers(inventory.builtComputers);
         // Load Menu
         menu();
     }
@@ -1716,7 +1732,18 @@ public class Main{
                 case 5: displayComputers(); break;
                 case 6: buildComputers(); break;
                 case 7: manageUsers();      break;
-                case 8: System.out.println("Exiting..."); break;
+                case 8: 
+                    System.out.println("Exiting...");
+                    // Saving All Data to Files Before Exiting
+                    FileManager.saveCPUs(inventory.cpus);
+                    FileManager.saveGPUs(inventory.gpus);
+                    FileManager.saveRAMs(inventory.rams);
+                    FileManager.saveStorages(inventory.storage);
+                    FileManager.savePSUs(inventory.psus);
+                    FileManager.saveMBs(inventory.mbs);
+                    FileManager.saveUsers(users);
+                    FileManager.saveBuiltComputers(inventory.builtComputers);
+                    break;
                 default: System.out.println("Invalid Choice");
                 }
         }while(choice != 8);

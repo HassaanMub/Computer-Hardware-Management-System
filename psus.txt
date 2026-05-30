@@ -1,0 +1,24 @@
+ID: 0
+Brand: XPG
+Model Name: Pylon
+Price: 16500.0
+Watt: 650
+Efficiency: Bronze
+Modular: false
+--------------------
+ID: 1
+Brand: Corsair
+Model Name: RM750x
+Price: 32500.0
+Watt: 750
+Efficiency: Gold
+Modular: true
+--------------------
+ID: 2
+Brand: MSI
+Model Name: MAG A750GL
+Price: 28499.0
+Watt: 750
+Efficiency: Gold
+Modular: true
+--------------------

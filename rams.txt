@@ -1,0 +1,32 @@
+ID: 0
+Brand: Corsair
+Model Name: Vengeance DDR5 16x1
+Price: 74999.0
+Capacity: 16
+Speed: 6000
+Latency: 16
+--------------------
+ID: 1
+Brand: G.Skill
+Model Name: Flare X5 DDR5 16x2
+Price: 114000.0
+Capacity: 32
+Speed: 6000
+Latency: 36
+--------------------
+ID: 2
+Brand: XPG
+Model Name: Spectrix D35G DDR4 16x2
+Price: 69999.0
+Capacity: 32
+Speed: 3200
+Latency: 16
+--------------------
+ID: 3
+Brand: Kingston
+Model Name: Fury Beast 8x2
+Price: 14500.0
+Capacity: 16
+Speed: 3200
+Latency: 16
+--------------------

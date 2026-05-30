@@ -1,0 +1,28 @@
+ID: 0
+Brand: MSI
+Model Name: B650
+Price: 30000.0
+Socket: AM5
+RAM Slots: 2
+--------------------
+ID: 1
+Brand: MSI
+Model Name: X870
+Price: 120000.0
+Socket: AM5
+RAM Slots: 2
+--------------------
+ID: 2
+Brand: Asus
+Model Name: H610M-K
+Price: 25000.0
+Socket: LGA 1700
+RAM Slots: 2
+--------------------
+ID: 3
+Brand: Gigabyte
+Model Name: B760M H DDR4
+Price: 38000.0
+Socket: LGA 1700
+RAM Slots: 2
+--------------------
