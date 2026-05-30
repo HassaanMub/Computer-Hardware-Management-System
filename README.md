@@ -65,7 +65,7 @@ project/
 
 ---
 
-## 🧱 Classes Overview
+## Classes Overview
 
 ### `Hardware` *(abstract)*
 Base class for all components. Holds common fields: `id`, `brand`, `modelName`, `price`, and declares the abstract `display()` method.
@@ -96,7 +96,7 @@ Handles file I/O for all eight data files. Uses `FileWriter` for saving and `Sca
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -119,7 +119,7 @@ Data files are created automatically in the working directory on first run.
 
 ---
 
-## 🎮 Usage Guide
+## Usage Guide
 
 On launch, the main menu appears:
 
@@ -159,7 +159,7 @@ Select option **8**. All data is written to the `.txt` files before the program 
 
 ---
 
-## 💾 Data Persistence
+## Data Persistence
 
 Each component type and entity is saved to its own file in a labeled plain-text format:
 
@@ -182,7 +182,7 @@ Data is loaded automatically at startup and saved on exit (option 8).
 
 ---
 
-## ⚠️ Known Limitations
+## Known Limitations
 
 - **Single-file source** — All classes are in one `.java` file, which limits scalability for larger projects.
 - **No compatibility validation** — The build process does not check socket compatibility between CPU and Motherboard.
@@ -192,7 +192,7 @@ Data is loaded automatically at startup and saved on exit (option 8).
 
 ---
 
-## 🛠️ Potential Improvements
+## Potential Improvements
 
 - Add socket compatibility checks during PC builds
 - Implement search and filter functionality for large inventories
