@@ -1,24 +1,56 @@
 ID: 0
-Brand: XPG
-Model Name: Pylon
-Price: 16500.0
-Watt: 650
-Efficiency: Bronze
-Modular: false
---------------------
-ID: 1
 Brand: Corsair
 Model Name: RM750x
-Price: 32500.0
+Price: 31500.0
+Watt: 750
+Efficiency: Gold
+Modular: true
+--------------------
+ID: 1
+Brand: Seasonic
+Model Name: Focus GX-750
+Price: 28000.0
 Watt: 750
 Efficiency: Gold
 Modular: true
 --------------------
 ID: 2
+Brand: Corsair
+Model Name: AX1500i
+Price: 165000.0
+Watt: 1500
+Efficiency: Titanium
+Modular: true
+--------------------
+ID: 3
+Brand: SilverStone
+Model Name: Hela 1200R
+Price: 84000.0
+Watt: 1200
+Efficiency: Platinum
+Modular: true
+--------------------
+ID: 4
+Brand: Seasonic
+Model Name: Vertex GX-1200
+Price: 79500.0
+Watt: 1200
+Efficiency: Gold
+Modular: true
+--------------------
+ID: 5
+Brand: Corsair
+Model Name: CX650
+Price: 17500.0
+Watt: 650
+Efficiency: Bronze
+Modular: false
+--------------------
+ID: 6
 Brand: MSI
-Model Name: MAG A750GL
-Price: 28499.0
-Watt: 750
+Model Name: MAG A850GL
+Price: 33500.0
+Watt: 850
 Efficiency: Gold
 Modular: true
 --------------------

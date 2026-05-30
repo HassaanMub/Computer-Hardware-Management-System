@@ -1,13 +1,4 @@
 ID: 0
-Brand: AMD
-Model Name: RX 6600 XT
-Price: 65000.0
-VRAM: 8
-Cores: 2048
-Speed: 2359
-TDP: 160
---------------------
-ID: 1
 Brand: Nvidia
 Model Name: RTX 5090
 Price: 1350000.0
@@ -16,16 +7,7 @@ Cores: 21760
 Speed: 2017
 TDP: 575
 --------------------
-ID: 2
-Brand: AMD
-Model Name: RX 590
-Price: 24500.0
-VRAM: 8
-Cores: 2304
-Speed: 1469
-TDP: 175
---------------------
-ID: 3
+ID: 1
 Brand: Nvidia
 Model Name: GTX 750
 Price: 12500.0
@@ -34,12 +16,75 @@ Cores: 512
 Speed: 1020
 TDP: 55
 --------------------
-ID: 4
+ID: 2
 Brand: Nvidia
-Model Name: RTX 2060 SUPER
-Price: 65500.0
+Model Name: Asus Phoenix GTX 1650 Evo
+Price: 34500.0
+VRAM: 4
+Cores: 896
+Speed: 1665
+TDP: 75
+--------------------
+ID: 3
+Brand: Nvidia
+Model Name: Zotac RTX 4080 Super Trinity
+Price: 355000.0
+VRAM: 16
+Cores: 10240
+Speed: 2550
+TDP: 320
+--------------------
+ID: 4
+Brand: AMD
+Model Name: Sapphire Pulse Radeon RX 7600
+Price: 93500.0
 VRAM: 8
-Cores: 2176
-Speed: 1470
-TDP: 175
+Cores: 2048
+Speed: 2755
+TDP: 165
+--------------------
+ID: 5
+Brand: Nvidia
+Model Name: Gigabyte GTX 1660 Super OC
+Price: 57500.0
+VRAM: 6
+Cores: 1408
+Speed: 1830
+TDP: 125
+--------------------
+ID: 6
+Brand: Nvidia
+Model Name: Asus ROG RTX 4090 OC
+Price: 699000.0
+VRAM: 24
+Cores: 16384
+Speed: 2640
+TDP: 450
+--------------------
+ID: 7
+Brand: AMD
+Model Name: Sapphire Pulse RX 6700 XT
+Price: 125000.0
+VRAM: 12
+Cores: 2560
+Speed: 2581
+TDP: 230
+--------------------
+ID: 8
+Brand: AMD
+Model Name: XFX Speedster MERC RX 7900 XTX
+Price: 298000.0
+VRAM: 24
+Cores: 6144
+Speed: 2615
+TDP: 355
+--------------------
+ID: 9
+Brand: AMD
+Model Name: Sapphire Pulse RX 6500 XT
+Price: 48500.0
+VRAM: 4
+Cores: 1024
+Speed: 2825
+TDP: 107
 --------------------

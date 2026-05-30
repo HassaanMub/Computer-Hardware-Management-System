@@ -1,32 +1,64 @@
 ID: 0
-Brand: Corsair
-Model Name: Vengeance DDR5 16x1
-Price: 74999.0
-Capacity: 16
-Speed: 6000
-Latency: 16
---------------------
-ID: 1
-Brand: G.Skill
-Model Name: Flare X5 DDR5 16x2
-Price: 114000.0
-Capacity: 32
-Speed: 6000
-Latency: 36
---------------------
-ID: 2
-Brand: XPG
-Model Name: Spectrix D35G DDR4 16x2
-Price: 69999.0
-Capacity: 32
-Speed: 3200
-Latency: 16
---------------------
-ID: 3
 Brand: Kingston
 Model Name: Fury Beast 8x2
 Price: 14500.0
 Capacity: 16
 Speed: 3200
 Latency: 16
+--------------------
+ID: 1
+Brand: TeamGroup
+Model Name: T-Force Delta RGB
+Price: 199999.0
+Capacity: 64
+Speed: 6000
+Latency: 38
+--------------------
+ID: 2
+Brand: G.Skill
+Model Name: Trident Z5 Neo DDR5
+Price: 75000.0
+Capacity: 64
+Speed: 6000
+Latency: 36
+--------------------
+ID: 3
+Brand: XPG
+Model Name: Lancer Blade
+Price: 60000.0
+Capacity: 32
+Speed: 6000
+Latency: 30
+--------------------
+ID: 4
+Brand: Corsair
+Model Name: Vengeance Black
+Price: 28500.0
+Capacity: 16
+Speed: 5600
+Latency: 40
+--------------------
+ID: 5
+Brand: Lexar
+Model Name: ARES DDR5
+Price: 44500.0
+Capacity: 16
+Speed: 5200
+Latency: 38
+--------------------
+ID: 6
+Brand: Corsair
+Model Name: Vengeance RGB
+Price: 60500.0
+Capacity: 32
+Speed: 6400
+Latency: 32
+--------------------
+ID: 7
+Brand: TeamGroup
+Model Name: Elite Desktop
+Price: 15000.0
+Capacity: 8
+Speed: 3200
+Latency: 22
 --------------------

@@ -1,0 +1,80 @@
+Computer ID: 0
+CPU Brand: AMD
+CPU Model: Ryzen 5 8400F
+CPU Price: 31999.0
+CPU Cores: 6
+CPU Threads: 12
+CPU Clock Speed: 4.2
+CPU Cache: 16
+CPU TDP: 65
+CPU Socket: AM5
+GPU Brand: AMD
+GPU Model: RX 6600 XT
+GPU Price: 65000.0
+GPU VRAM: 8
+GPU Cores: 2048
+GPU Speed: 2359
+GPU TDP: 160
+RAM Brand: Corsair
+RAM Model: Vengeance DDR5 16x1
+RAM Price: 74999.0
+RAM Capacity: 16
+RAM Speed: 6000
+RAM Latency: 6
+Storage Brand: Seagate
+Storage Model: BarraCuda
+Storage Price: 42000.0
+Storage Type: HDD SATA III
+Storage Capacity: 2000
+PSU Brand: Corsair
+PSU Model: RM750x
+PSU Price: 32500.0
+PSU Watt: 750
+PSU Efficiency: Gold
+PSU Modular: true
+MB Brand: MSI
+MB Model: B650
+MB Price: 30000.0
+MB Socket: AM5
+MB Ram Slots: 2
+--------------------
+Computer ID: 1
+CPU Brand: AMD
+CPU Model: Ryzen 7 9800X3D
+CPU Price: 128999.0
+CPU Cores: 8
+CPU Threads: 16
+CPU Clock Speed: 5.2
+CPU Cache: 104
+CPU TDP: 120
+CPU Socket: AM5
+GPU Brand: Nvidia
+GPU Model: RTX 2060 SUPER
+GPU Price: 65500.0
+GPU VRAM: 8
+GPU Cores: 2176
+GPU Speed: 1470
+GPU TDP: 175
+RAM Brand: G.Skill
+RAM Model: Flare X5 DDR5 16x2
+RAM Price: 114000.0
+RAM Capacity: 32
+RAM Speed: 6000
+RAM Latency: 6
+Storage Brand: Western Digital
+Storage Model: Blue WD10
+Storage Price: 15500.0
+Storage Type: HDD SATA III
+Storage Capacity: 1000
+PSU Brand: MSI
+PSU Model: MAG A750GL
+PSU Price: 28499.0
+PSU Watt: 750
+PSU Efficiency: Gold
+PSU Modular: true
+MB Brand: MSI
+MB Model: X870
+MB Price: 120000.0
+MB Socket: AM5
+MB Ram Slots: 2
+--------------------

@@ -1,28 +1,49 @@
 ID: 0
-Brand: MSI
-Model Name: B650
-Price: 30000.0
-Socket: AM5
-RAM Slots: 2
---------------------
-ID: 1
-Brand: MSI
-Model Name: X870
-Price: 120000.0
-Socket: AM5
-RAM Slots: 2
---------------------
-ID: 2
 Brand: Asus
 Model Name: H610M-K
 Price: 25000.0
 Socket: LGA 1700
 RAM Slots: 2
 --------------------
+ID: 1
+Brand: MSI
+Model Name: PRO B760M-A WIFI
+Price: 48999.0
+Socket: LGA 1700
+RAM Slots: 4
+--------------------
+ID: 2
+Brand: MSI
+Model Name: A520M-A PRO
+Price: 20500.0
+Socket: AM4
+RAM Slots: 2
+--------------------
 ID: 3
+Brand: Asus
+Model Name: Prime H610M-K ARGB
+Price: 25000.0
+Socket: LGA 1700
+RAM Slots: 2
+--------------------
+ID: 4
 Brand: Gigabyte
 Model Name: B760M H DDR4
 Price: 38000.0
 Socket: LGA 1700
 RAM Slots: 2
+--------------------
+ID: 5
+Brand: Asus
+Model Name: ROG X670E-E
+Price: 154000.0
+Socket: AM5
+RAM Slots: 4
+--------------------
+ID: 6
+Brand: Asus
+Model Name: Maximus Z790
+Price: 245000.0
+Socket: LGA 1700
+RAM Slots: 4
 --------------------

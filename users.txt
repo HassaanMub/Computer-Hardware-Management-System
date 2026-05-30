@@ -14,11 +14,3 @@ User ID: 3
 Name: Ayan Muhammad
 Has PC: false
 --------------------
-User ID: 4
-Name: Faisal Ibrahim
-Has PC: false
---------------------
-User ID: 5
-Name: Talha Ansari
-Has PC: false
---------------------

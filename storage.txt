@@ -1,21 +1,35 @@
 ID: 0
-Brand: Kingston
-Model Name: NV2 NVMe
-Price: 20499.0
-Type: SSD M.2
-Capacity: 1000
+Brand: Lexar
+Model Name: NM790
+Price: 42000.0
+Type: SSD
+Capacity: 2000
 --------------------
 ID: 1
 Brand: Seagate
-Model Name: BarraCuda
-Price: 42000.0
-Type: HDD SATA III
-Capacity: 2000
+Model Name: IronWolf NAS
+Price: 115000.0
+Type: HDD
+Capacity: 8000
 --------------------
 ID: 2
-Brand: Western Digital
-Model Name: Blue WD10
-Price: 15500.0
-Type: HDD SATA III
+Brand: Crucial
+Model Name: MX500
+Price: 24500.0
+Type: SSD
 Capacity: 1000
+--------------------
+ID: 3
+Brand: Crucial
+Model Name: T700 Gen5
+Price: 105000.0
+Type: SSD M.2
+Capacity: 2000
+--------------------
+ID: 4
+Brand: Kingston
+Model Name: A400 SATA
+Price: 11500.0
+Type: SSD SATA III
+Capacity: 240
 --------------------

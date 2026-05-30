@@ -173,26 +173,27 @@ class Computer {
     RAM ram;
     Storage storage;
     PSU psu;
+    MotherBoard mb;
     static int nextCompId = 0;
     public Computer(CPU cpu, GPU gpu, RAM ram,
-        Storage storage, PSU psu) {
+        Storage storage, PSU psu, MotherBoard mb) {
         this.id = nextCompId++;
         this.cpu = cpu;
         this.gpu = gpu;
         this.ram = ram;
         this.storage = storage;
         this.psu = psu;
+        this.mb = mb;
     }
     public void displaySpecs(){
-        cpu.display();
-        System.out.println();
-        gpu.display();
-        System.out.println();
-        ram.display();
-        System.out.println();
-        storage.display();
-        System.out.println();
-        psu.display();
+        System.out.println("ID: " + id);
+        System.out.println("CPU: " + cpu.brand + " " + cpu.modelName);
+        System.out.println("GPU: " + gpu.brand + " " + gpu.modelName + " " + gpu.VRAM + " GB");
+        System.out.println("RAM: " + ram.brand + " " + ram.modelName + " " + ram.ramCapacity + " GB");
+        System.out.println("Storage: " + storage.brand + " " + storage.modelName + " " + storage.capacity + " GB");
+        System.out.println("PSU: " + psu.brand + " " + psu.modelName + " " + psu.watt + " W");
+        System.out.println("MotherBoard: " + mb.brand + " " + mb.modelName);
+        System.out.println("---------------");
     }
 }
 // INVENTORY CLASS
@@ -360,7 +361,7 @@ class Inventory {
         }
         System.out.print("Select CPU Number to Edit: ");
         int choice = sc.nextInt(); 
-        sc.nextLine();
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > cpus.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -409,7 +410,8 @@ class Inventory {
             gpus.get(i).display();
         }
         System.out.print("Select GPU Number to Edit: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > gpus.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -452,7 +454,8 @@ class Inventory {
             rams.get(i).display();
         }
         System.out.print("Select RAM Number to Edit: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > rams.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -492,7 +495,8 @@ class Inventory {
             storage.get(i).display();
         }
         System.out.print("Select Storage Number to Edit: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > storage.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -529,7 +533,8 @@ class Inventory {
             psus.get(i).display();
         }
         System.out.print("Select PSU Number to Edit: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > psus.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -570,7 +575,8 @@ class Inventory {
             mbs.get(i).display();
         }
         System.out.print("Select Motherboard Number to Edit: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > mbs.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -608,7 +614,8 @@ class Inventory {
             cpus.get(i).display();
         }
         System.out.print("Select CPU Number to Delete: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > cpus.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -627,7 +634,8 @@ class Inventory {
             gpus.get(i).display();
         }
         System.out.print("Select GPU Number to Delete: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > gpus.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -646,8 +654,9 @@ class Inventory {
             rams.get(i).display();
         }
         System.out.print("Select RAM Number to Delete: ");
-        int choice = sc.nextInt(); sc.nextLine();
-        if (choice < 1 || choice > rams.size()) { 
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
+        if  (choice < 1 || choice > rams.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
         }
@@ -665,7 +674,8 @@ class Inventory {
             storage.get(i).display();
         }
         System.out.print("Select Storage Number to Delete: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > storage.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -684,7 +694,8 @@ class Inventory {
             psus.get(i).display();
         }
         System.out.print("Select PSU Number to Delete: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > psus.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -703,7 +714,8 @@ class Inventory {
             mbs.get(i).display();
         }
         System.out.print("Select Motherboard Number to Delete: ");
-        int choice = sc.nextInt(); sc.nextLine();
+        int choice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (choice < 1 || choice > mbs.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -714,6 +726,7 @@ class Inventory {
     // Build Computer
     public void buildComputer() {
         System.out.println("\n--- Build a Computer ---");
+        // CPU
         if (cpus.isEmpty()) { 
             System.out.println("No CPUs in Inventory. Cannot Build Computer.\n"); 
             return; 
@@ -724,12 +737,14 @@ class Inventory {
             cpus.get(i).display();
         }
         System.out.print("Enter CPU Number: ");
-        int cpuChoice = sc.nextInt(); sc.nextLine();
+        int cpuChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (cpuChoice < 1 || cpuChoice > cpus.size()) { 
             System.out.println("Invalid Selection. Build Cancelled.\n"); 
             return; 
         }
         CPU selectedCPU = cpus.get(cpuChoice - 1);
+        // GPU
         if (gpus.isEmpty()) { 
             System.out.println("No GPUs in Inventory. Cannot Build Computer.\n"); 
             return; 
@@ -740,12 +755,14 @@ class Inventory {
             gpus.get(i).display();
         }
         System.out.print("Enter GPU Number: ");
-        int gpuChoice = sc.nextInt(); sc.nextLine();
+        int gpuChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (gpuChoice < 1 || gpuChoice > gpus.size()) { 
             System.out.println("Invalid Selection. Build Cancelled.\n"); 
             return; 
         }
         GPU selectedGPU = gpus.get(gpuChoice - 1);
+        // RAM
         if (rams.isEmpty()) { 
             System.out.println("No RAM in Inventory. Cannot Build Computer.\n"); 
             return; 
@@ -756,12 +773,14 @@ class Inventory {
             rams.get(i).display();
         }
         System.out.print("Enter RAM Number: ");
-        int ramChoice = sc.nextInt(); sc.nextLine();
+        int ramChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (ramChoice < 1 || ramChoice > rams.size()) { 
             System.out.println("Invalid Selection. Build Cancelled.\n"); 
             return; 
         }
         RAM selectedRAM = rams.get(ramChoice - 1);
+        // STRG
         if (storage.isEmpty()) { 
             System.out.println("No Storage in Inventory. Cannot Build Computer.\n"); 
             return; 
@@ -772,12 +791,14 @@ class Inventory {
             storage.get(i).display();
         }
         System.out.print("Enter Storage Number: ");
-        int strgChoice = sc.nextInt(); sc.nextLine();
+        int strgChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (strgChoice < 1 || strgChoice > storage.size()) { 
             System.out.println("Invalid Selection. Build Cancelled.\n"); 
             return; 
         }
         Storage selectedStorage = storage.get(strgChoice - 1);
+        // PSU
         if (psus.isEmpty()) { 
             System.out.println("No PSUs in Inventory. Cannot Build Computer.\n"); 
             return; 
@@ -788,18 +809,38 @@ class Inventory {
             psus.get(i).display();
         }
         System.out.print("Enter PSU Number: ");
-        int psuChoice = sc.nextInt(); sc.nextLine();
+        int psuChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (psuChoice < 1 || psuChoice > psus.size()) { 
             System.out.println("Invalid Selection. Build Cancelled.\n"); 
             return; }
         PSU selectedPSU = psus.get(psuChoice - 1);
+        // Motherboard
+        if (mbs.isEmpty()) { 
+            System.out.println("No Motherboards in Inventory. Cannot Build Computer.\n"); 
+            return; 
+        }
+        System.out.println("\n[Step 1 of 5] Select a Motherboard:");
+        for (int i = 0; i < mbs.size(); i++) {
+            System.out.println("(" + (i + 1) + ")");
+            mbs.get(i).display();
+        }
+        System.out.print("Enter Motherboard Number: ");
+        int MBChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
+        if (MBChoice < 1 || MBChoice > mbs.size()) { 
+            System.out.println("Invalid Selection. Build Cancelled.\n"); 
+            return; 
+        }
+        MotherBoard selectedMB = mbs.get(MBChoice - 1);
         // Remove chosen parts from inventory 
         cpus.remove(cpuChoice - 1);
         gpus.remove(gpuChoice - 1);
         rams.remove(ramChoice - 1);
         storage.remove(strgChoice - 1);
         psus.remove(psuChoice - 1);
-        Computer newPC = new Computer(selectedCPU, selectedGPU, selectedRAM, selectedStorage, selectedPSU);
+        mbs.remove(MBChoice - 1);
+        Computer newPC = new Computer(selectedCPU, selectedGPU, selectedRAM, selectedStorage, selectedPSU, selectedMB);
         builtComputers.add(newPC);
         System.out.println("\nComputer Built Successfully! Here are its specs:");
         newPC.displaySpecs();
@@ -822,7 +863,7 @@ class Inventory {
         }
         System.out.print("Select Computer Number to Sell: ");
         int compChoice = sc.nextInt(); 
-        sc.nextLine();
+        sc.nextLine(); // Flush
         if (compChoice < 1 || compChoice > builtComputers.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
@@ -835,43 +876,57 @@ class Inventory {
             users.get(i).displayUser();
         }
         System.out.print("Select User Number to Sell To: ");
-        int userChoice = sc.nextInt(); sc.nextLine();
+        int userChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
         if (userChoice < 1 || userChoice > users.size()) { 
             System.out.println("Invalid Selection.\n"); 
             return; 
         }
         User selectedUser = users.get(userChoice - 1);
-        // Warn if user already owns a computer
+        // Warn If User Already Owns a Computer
         if (selectedUser.hasComputer()) {
-            System.out.println("Warning: " + selectedUser.name + " already owns Computer #"
-                + selectedUser.pc.id + ". They cannot own two computers.");
+            System.out.println("Warning: " + selectedUser.name + " already owns Computer #" + selectedUser.pc.id + ". They cannot own two computers.");
             System.out.print("Cancel sale? (y/n): ");
             String ans = sc.nextLine();
-            if (!ans.equalsIgnoreCase("n")) { System.out.println("Sale Cancelled.\n"); return; }
+            if (!ans.equalsIgnoreCase("n")) { 
+                System.out.println("Sale Cancelled.\n"); 
+                return; 
+            }
         }
-        // Transfer: remove from inventory, assign to user
         builtComputers.remove(compChoice - 1);
         selectedUser.pc = selectedPC;
         System.out.println("Computer #" + selectedPC.id + " sold to " + selectedUser.name + " successfully!\n");
     }
     // Buy Computer From User
     public void buyComputer(ArrayList<User> users) {
-        if (users.isEmpty()) { System.out.println("No users found.\n"); return; }
-        // Filter to only users who own a computer
+        if (users.isEmpty()) { 
+            System.out.println("No users found.\n"); 
+            return; 
+        }
+        // Filter to Only Users Who Own a Computer
         ArrayList<User> usersWithPC = new ArrayList<>();
-        for (User u : users) { if (u.hasComputer()) usersWithPC.add(u); }
-        if (usersWithPC.isEmpty()) { System.out.println("No users currently own a computer.\n"); return; }
+        for (User u : users) { 
+            if (u.hasComputer()) 
+                usersWithPC.add(u); 
+        }
+        if (usersWithPC.isEmpty()) { 
+            System.out.println("No Users Currently Own a Computer.\n"); 
+            return; 
+        }
         System.out.println("\n--- Users With a Computer ---");
         for (int i = 0; i < usersWithPC.size(); i++) {
             System.out.println("(" + (i + 1) + ")");
             usersWithPC.get(i).displayUser();
         }
         System.out.print("Select User Number to Buy Computer From: ");
-        int userChoice = sc.nextInt(); sc.nextLine();
-        if (userChoice < 1 || userChoice > usersWithPC.size()) { System.out.println("Invalid Selection.\n"); return; }
+        int userChoice = sc.nextInt(); 
+        sc.nextLine(); // Flush
+        if (userChoice < 1 || userChoice > usersWithPC.size()) { 
+            System.out.println("Invalid Selection.\n"); 
+            return; 
+        }
         User selectedUser = usersWithPC.get(userChoice - 1);
         Computer returnedPC = selectedUser.pc;
-        // Transfer: remove from user, add back to inventory
         selectedUser.pc = null;
         builtComputers.add(returnedPC);
         System.out.println("Computer #" + returnedPC.id + " bought back from " + selectedUser.name + " and returned to inventory!\n");
@@ -1406,6 +1461,12 @@ class FileManager {
                     writer.write("PSU Watt: " + pc.psu.watt + "\n");
                     writer.write("PSU Efficiency: " + pc.psu.efficiency + "\n");
                     writer.write("PSU Modular: " + pc.psu.isModular + "\n");
+                    // MB
+                    writer.write("MB Brand: " + pc.mb.brand + "\n");
+                    writer.write("MB Model: " + pc.mb.modelName + "\n");
+                    writer.write("MB Price: " + pc.mb.price + "\n");
+                    writer.write("MB Socket: " + pc.mb.socket + "\n");
+                    writer.write("MB Ram Slots: " + pc.mb.ramSlot + "\n");
                 }
                 writer.write("--------------------\n");
             }
@@ -1513,12 +1574,26 @@ class FileManager {
                         psuModel,
                         psuPrice
                     );
+                    // MB
+                    String mbBrand = reader.nextLine().substring(10);
+                    String mbModel = reader.nextLine().substring(10);
+                    double mbPrice = Double.parseDouble(reader.nextLine().substring(10));
+                    String mbSocket = reader.nextLine().substring(11);
+                    int mbRamSlot = Integer.parseInt(reader.nextLine().substring(14));
+                    MotherBoard mb = new MotherBoard(
+                        mbSocket,
+                        mbRamSlot,
+                        mbBrand,
+                        mbModel,
+                        mbPrice
+                    );
                     Computer pc = new Computer(
                         cpu,
                         gpu,
                         ram,
                         storage,
-                        psu
+                        psu,
+                        mb
                     );
                     pc.id = pcId;
                     user.pc = pc;
@@ -1576,6 +1651,12 @@ class FileManager {
                 writer.write("PSU Watt: " + pc.psu.watt + "\n");
                 writer.write("PSU Efficiency: " + pc.psu.efficiency + "\n");
                 writer.write("PSU Modular: " + pc.psu.isModular + "\n");
+                // MB
+                writer.write("MB Brand: " + pc.mb.brand + "\n");
+                writer.write("MB Model: " + pc.mb.modelName + "\n");
+                writer.write("MB Price: " + pc.mb.price + "\n");
+                writer.write("MB Socket: " + pc.mb.socket + "\n");
+                writer.write("MB Ram Slots: " + pc.mb.ramSlot + "\n");
                 writer.write("--------------------\n");
             }
             writer.close();
@@ -1634,7 +1715,7 @@ class FileManager {
                 double ramPrice = Double.parseDouble(reader.nextLine().substring(11));
                 int ramCapacity = Integer.parseInt(reader.nextLine().substring(14));
                 int ramSpeed = Integer.parseInt(reader.nextLine().substring(11));
-                int ramLatency = Integer.parseInt(reader.nextLine().substring(14));
+                int ramLatency = Integer.parseInt(reader.nextLine().substring(13));
                 RAM ram = new RAM(
                     ramCapacity,
                     ramSpeed,
@@ -1671,12 +1752,26 @@ class FileManager {
                     psuModel,
                     psuPrice
                 );
+                // MB
+                String mbBrand = reader.nextLine().substring(10);
+                String mbModel = reader.nextLine().substring(10);
+                double mbPrice = Double.parseDouble(reader.nextLine().substring(10));
+                String mbSocket = reader.nextLine().substring(11);
+                int mbRamSlots = Integer.parseInt(reader.nextLine().substring(14));
+                MotherBoard mb = new MotherBoard(
+                    mbSocket,
+                    mbRamSlots,
+                    mbBrand,
+                    mbModel,
+                    mbPrice
+                );
                 Computer pc = new Computer(
                     cpu,
                     gpu,
                     ram,
                     storage,
-                    psu
+                    psu,
+                    mb
                 );
                 pc.id = pcId;
                 builtComputers.add(pc);
@@ -1685,6 +1780,7 @@ class FileManager {
             reader.close();
         } catch(Exception e) {
             System.out.println("Error Loading Built Computers!");
+            e.printStackTrace();
         }
     }
 }
