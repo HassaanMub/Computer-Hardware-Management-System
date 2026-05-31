@@ -1799,7 +1799,7 @@ public class Main{
         int choice = sc.nextInt(); 
         sc.nextLine(); // Flush
         if (choice < 1 || choice > users.size()) { 
-            System.out.println("Invalid Selection.\n"); 
+            System.out.println("Invalid Selection!\n"); 
             return; 
         }
         User user = users.get(choice - 1);
@@ -1811,7 +1811,7 @@ public class Main{
     // Delete User
     public static void deleteUser() {
         if (users.isEmpty()) { 
-            System.out.println("No Users Found.\n"); 
+            System.out.println("No Users Found!\n"); 
             return; 
         }
         System.out.println("--- User List ---");
@@ -1823,20 +1823,20 @@ public class Main{
         int choice = sc.nextInt(); 
         sc.nextLine(); // Flush
         if (choice < 1 || choice > users.size()) { 
-            System.out.println("Invalid Selection.\n"); 
+            System.out.println("Invalid Selection!\n"); 
             return; 
         }
         User removed = users.remove(choice - 1);
         if (removed.hasComputer()) {
             inventory.builtComputers.add(removed.pc);
-            System.out.println("Note: Computer #" + removed.pc.id + " Returned to Inventory.");
+            System.out.println("Note: Computer #" + removed.pc.id + " Returned to Inventory!");
         }
-        System.out.println("User \"" + removed.name + "\" Deleted.\n");
+        System.out.println("User \"" + removed.name + "\" Deleted!\n");
     }
     // Display Users
     public static void displayAllUsers() {
         if (users.isEmpty()) { 
-            System.out.println("No Users Found.\n"); 
+            System.out.println("No Users Found!\n"); 
             return; 
         }
         System.out.println("--- All Users ---");
