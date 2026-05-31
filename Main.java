@@ -174,9 +174,10 @@ class Computer {
     Storage storage;
     PSU psu;
     MotherBoard mb;
+    double totalPrice;
     static int nextCompId = 0;
     public Computer(CPU cpu, GPU gpu, RAM ram,
-        Storage storage, PSU psu, MotherBoard mb) {
+        Storage storage, PSU psu, MotherBoard mb, double totalPrice) {
         this.id = nextCompId++;
         this.cpu = cpu;
         this.gpu = gpu;
@@ -184,6 +185,7 @@ class Computer {
         this.storage = storage;
         this.psu = psu;
         this.mb = mb;
+        this.totalPrice = totalPrice;
     }
     public void displaySpecs(){
         System.out.println("ID: " + id);
@@ -193,6 +195,7 @@ class Computer {
         System.out.println("Storage: " + storage.brand + " " + storage.modelName + " " + storage.capacity + " GB");
         System.out.println("PSU: " + psu.brand + " " + psu.modelName + " " + psu.watt + " W");
         System.out.println("MotherBoard: " + mb.brand + " " + mb.modelName);
+        System.out.println("Total Price: Rs " + totalPrice);
         System.out.println("---------------");
     }
 }
@@ -840,19 +843,20 @@ class Inventory {
         storage.remove(strgChoice - 1);
         psus.remove(psuChoice - 1);
         mbs.remove(MBChoice - 1);
-        Computer newPC = new Computer(selectedCPU, selectedGPU, selectedRAM, selectedStorage, selectedPSU, selectedMB);
+        double totalPrice = selectedCPU.price + selectedGPU.price + selectedRAM.price + selectedStorage.price + selectedPSU.price + selectedMB.price;  
+        Computer newPC = new Computer(selectedCPU, selectedGPU, selectedRAM, selectedStorage, selectedPSU, selectedMB, totalPrice);
         builtComputers.add(newPC);
-        System.out.println("\nComputer Built Successfully! Here are its specs:");
+        System.out.println("\nComputer Built Successfully! Here are its Specs:");
         newPC.displaySpecs();
     }
     // Sell Computer To User
     public void sellComputer(ArrayList<User> users) {
         if (builtComputers.isEmpty()) {
-            System.out.println("No computers available in inventory to sell.\n");
+            System.out.println("No Computers Available in Inventory to Sell!\n");
             return;
         }
         if (users.isEmpty()) {
-            System.out.println("No users found. Add a user first.\n");
+            System.out.println("No Users Found. Add a User First!\n");
             return;
         }
         // Show computers
@@ -865,7 +869,7 @@ class Inventory {
         int compChoice = sc.nextInt(); 
         sc.nextLine(); // Flush
         if (compChoice < 1 || compChoice > builtComputers.size()) { 
-            System.out.println("Invalid Selection.\n"); 
+            System.out.println("Invalid Selection!\n"); 
             return; 
         }
         Computer selectedPC = builtComputers.get(compChoice - 1);
@@ -879,17 +883,17 @@ class Inventory {
         int userChoice = sc.nextInt(); 
         sc.nextLine(); // Flush
         if (userChoice < 1 || userChoice > users.size()) { 
-            System.out.println("Invalid Selection.\n"); 
+            System.out.println("Invalid Selection!\n"); 
             return; 
         }
         User selectedUser = users.get(userChoice - 1);
         // Warn If User Already Owns a Computer
         if (selectedUser.hasComputer()) {
-            System.out.println("Warning: " + selectedUser.name + " already owns Computer #" + selectedUser.pc.id + ". They cannot own two computers.");
+            System.out.println("Warning: " + selectedUser.name + " already owns Computer #" + selectedUser.pc.id + ". They cannot own 2 Computers!");
             System.out.print("Cancel sale? (y/n): ");
             String ans = sc.nextLine();
             if (!ans.equalsIgnoreCase("n")) { 
-                System.out.println("Sale Cancelled.\n"); 
+                System.out.println("Sale Cancelled!\n"); 
                 return; 
             }
         }
@@ -1057,17 +1061,16 @@ class FileManager {
     static final String USERS_FILE = "users.txt";
     static final String BUILT_PC_FILE = "builtComputers.txt";
 
-    // Change Save Methods to Overwrite Methods
     // Create A File
     public static void createFile(String fileName){
         try {
             File file = new File(fileName);
             if(!file.exists()){
                 file.createNewFile();
-                System.out.println(fileName + "Created!");
+                System.out.println(fileName + " Created!");
             }
         } catch (IOException e) {
-            System.out.println("Error Creating File.");
+            System.out.println("Error Creating File!");
         }
     }
     // Initialize Files
@@ -1121,23 +1124,13 @@ class FileManager {
                 int tdp = Integer.parseInt(reader.readLine().substring(5));
                 String socket = reader.readLine().substring(8);
                 reader.readLine();
-                CPU cpu = new CPU(
-                    cores,
-                    threads,
-                    clockSpeed,
-                    cache,
-                    tdp,
-                    socket,
-                    brand,
-                    modelName,
-                    price
-                );
+                CPU cpu = new CPU(cores, threads, clockSpeed, cache, tdp, socket, brand, modelName, price);
                 cpu.id = id;
                 cpus.add(cpu);
             }
             reader.close();
         } catch (IOException e) {
-            System.out.println("Error Loading CPUs.");
+            System.out.println("Error Loading CPUs!");
         }
     }
     // Save GPUs
@@ -1158,19 +1151,15 @@ class FileManager {
             }
             writer.close();
         } catch(IOException e) {
-            System.out.println("Error Saving GPUs.");
+            System.out.println("Error Saving GPUs!");
         }
     }
     // Load GPUs
     public static void loadGPUs(ArrayList<GPU> gpus) {
-
         createFile(GPU_FILE);
-
         try {
             Scanner reader = new Scanner(new File(GPU_FILE));
-
             while (reader.hasNextLine()) {
-
                 reader.nextLine();
                 String brand = reader.nextLine().substring(7);
                 String model = reader.nextLine().substring(12);
@@ -1179,21 +1168,14 @@ class FileManager {
                 int cores = Integer.parseInt(reader.nextLine().substring(7));
                 int speed = Integer.parseInt(reader.nextLine().substring(7));
                 int tdp = Integer.parseInt(reader.nextLine().substring(5));
-
                 reader.nextLine();
-
-                GPU gpu = new GPU(
-                    vram, cores, speed, tdp,
-                    brand, model, price
-                );
-
+                GPU gpu = new GPU(vram, cores, speed, tdp, brand, model, price);
                 gpus.add(gpu);
             }
-
             reader.close();
 
         } catch (Exception e) {
-            System.out.println("Error Loading GPUs.");
+            System.out.println("Error Loading GPUs!");
         }
     }
     // Save RAMs
@@ -1218,14 +1200,10 @@ class FileManager {
     }
     // Load RAMs
     public static void loadRAMs(ArrayList<RAM> rams) {
-
         createFile(RAM_FILE);
-
         try {
             Scanner reader = new Scanner(new File(RAM_FILE));
-
             while (reader.hasNextLine()) {
-
                 reader.nextLine();
                 String brand = reader.nextLine().substring(7);
                 String model = reader.nextLine().substring(12);
@@ -1233,21 +1211,13 @@ class FileManager {
                 int capacity = Integer.parseInt(reader.nextLine().substring(10));
                 int speed = Integer.parseInt(reader.nextLine().substring(7));
                 int latency = Integer.parseInt(reader.nextLine().substring(9));
-
                 reader.nextLine();
-
-                RAM ram = new RAM(
-                    capacity, speed, latency,
-                    brand, model, price
-                );
-
+                RAM ram = new RAM(capacity, speed, latency, brand, model, price);
                 rams.add(ram);
             }
-
             reader.close();
-
         } catch (Exception e) {
-            System.out.println("Error Loading RAMs.");
+            System.out.println("Error Loading RAMs!");
         }
     }
     // Save Storage
@@ -1271,35 +1241,23 @@ class FileManager {
     }
     // Load Storage
     public static void loadStorage(ArrayList<Storage> storage) {
-
         createFile(STORAGE_FILE);
-
         try {
             Scanner reader = new Scanner(new File(STORAGE_FILE));
-
             while (reader.hasNextLine()) {
-
                 reader.nextLine();
                 String brand = reader.nextLine().substring(7);
                 String model = reader.nextLine().substring(12);
                 double price = Double.parseDouble(reader.nextLine().substring(7));
                 String type = reader.nextLine().substring(6);
                 int capacity = Integer.parseInt(reader.nextLine().substring(10));
-
                 reader.nextLine();
-
-                Storage strg = new Storage(
-                    type, capacity,
-                    brand, model, price
-                );
-
+                Storage strg = new Storage(type, capacity, brand, model, price);
                 storage.add(strg);
             }
-
             reader.close();
-
         } catch (Exception e) {
-            System.out.println("Error Loading Storage.");
+            System.out.println("Error Loading Storage!");
         }
     }
     // Save PSUs
@@ -1319,19 +1277,15 @@ class FileManager {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error Saving PSUs.");
+            System.out.println("Error Saving PSUs!");
         }
     }
     // Load PSUs
     public static void loadPSUs(ArrayList<PSU> psus) {
-
         createFile(PSU_FILE);
-
         try {
             Scanner reader = new Scanner(new File(PSU_FILE));
-
             while (reader.hasNextLine()) {
-
                 reader.nextLine();
                 String brand = reader.nextLine().substring(7);
                 String model = reader.nextLine().substring(12);
@@ -1339,21 +1293,13 @@ class FileManager {
                 int watt = Integer.parseInt(reader.nextLine().substring(6));
                 String efficiency = reader.nextLine().substring(12);
                 boolean modular = Boolean.parseBoolean(reader.nextLine().substring(9));
-
                 reader.nextLine();
-
-                PSU psu = new PSU(
-                    watt, efficiency, modular,
-                    brand, model, price
-                );
-
+                PSU psu = new PSU(watt, efficiency, modular, brand, model, price);
                 psus.add(psu);
             }
-
             reader.close();
-
         } catch (Exception e) {
-            System.out.println("Error Loading PSUs.");
+            System.out.println("Error Loading PSUs!");
         }
     }
     // Save MotherBoards
@@ -1372,40 +1318,28 @@ class FileManager {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error Saving Motherboards.");
+            System.out.println("Error Saving Motherboards!");
         }
     }
     // Load MotherBoards
     public static void loadMBs(ArrayList<MotherBoard> mbs) {
-
         createFile(MB_FILE);
-
         try {
             Scanner reader = new Scanner(new File(MB_FILE));
-
             while (reader.hasNextLine()) {
-
                 reader.nextLine();
                 String brand = reader.nextLine().substring(7);
                 String model = reader.nextLine().substring(12);
                 double price = Double.parseDouble(reader.nextLine().substring(7));
                 String socket = reader.nextLine().substring(8);
                 int ramSlots = Integer.parseInt(reader.nextLine().substring(11));
-
                 reader.nextLine();
-
-                MotherBoard mb = new MotherBoard(
-                    socket, ramSlots,
-                    brand, model, price
-                );
-
+                MotherBoard mb = new MotherBoard(socket, ramSlots, brand, model, price);
                 mbs.add(mb);
             }
-
             reader.close();
-
         } catch (Exception e) {
-            System.out.println("Error Loading Motherboards.");
+            System.out.println("Error Loading Motherboards!");
         }
     }
     // Save Users
@@ -1417,7 +1351,9 @@ class FileManager {
                 writer.write("User ID: " + user.userId + "\n");
                 writer.write("Name: " + user.name + "\n");
                 // NO PC
-                if(user.pc == null) { writer.write("Has PC: false\n"); }
+                if(user.pc == null) { 
+                    writer.write("Has PC: false\n"); 
+                }
                 // HAS PC
                 else {
                     writer.write("Has PC: true\n");
@@ -1467,12 +1403,14 @@ class FileManager {
                     writer.write("MB Price: " + pc.mb.price + "\n");
                     writer.write("MB Socket: " + pc.mb.socket + "\n");
                     writer.write("MB Ram Slots: " + pc.mb.ramSlot + "\n");
+                    // Total Price
+                    writer.write("Total Price: " + pc.totalPrice + "\n");
                 }
                 writer.write("--------------------\n");
             }
             writer.close();
         } catch(IOException e) {
-            System.out.println("Error Saving Users.");
+            System.out.println("Error Saving Users!");
         }
     }
     // Load Users
@@ -1486,9 +1424,9 @@ class FileManager {
                 boolean hasPC = Boolean.parseBoolean(reader.nextLine().substring(8));
                 User user = new User(name);
                 user.userId = userId;
-                // NO PC
+                // No PC
                 if(!hasPC) { user.pc = null; }
-                // HAS PC
+                // Has PC
                 else {
                     int pcId = Integer.parseInt(reader.nextLine().substring(13));
                     // CPU
@@ -1501,17 +1439,7 @@ class FileManager {
                     int cpuCache = Integer.parseInt(reader.nextLine().substring(11));
                     int cpuTdp = Integer.parseInt(reader.nextLine().substring(9));
                     String cpuSocket = reader.nextLine().substring(12);
-                    CPU cpu = new CPU(
-                        cpuCores,
-                        cpuThreads,
-                        cpuClock,
-                        cpuCache,
-                        cpuTdp,
-                        cpuSocket,
-                        cpuBrand,
-                        cpuModel,
-                        cpuPrice
-                    );
+                    CPU cpu = new CPU(cpuCores, cpuThreads, cpuClock, cpuCache, cpuTdp, cpuSocket, cpuBrand, cpuModel, cpuPrice);
                     // GPU
                     String gpuBrand = reader.nextLine().substring(11);
                     String gpuModel = reader.nextLine().substring(11);
@@ -1520,81 +1448,40 @@ class FileManager {
                     int gpuCores = Integer.parseInt(reader.nextLine().substring(11));
                     int gpuSpeed = Integer.parseInt(reader.nextLine().substring(11));
                     int gpuTdp = Integer.parseInt(reader.nextLine().substring(9));
-                    GPU gpu = new GPU(
-                        gpuVRAM,
-                        gpuCores,
-                        gpuSpeed,
-                        gpuTdp,
-                        gpuBrand,
-                        gpuModel,
-                        gpuPrice
-                    );
+                    GPU gpu = new GPU( gpuVRAM, gpuCores, gpuSpeed, gpuTdp, gpuBrand, gpuModel, gpuPrice);
                     // RAM
                     String ramBrand = reader.nextLine().substring(11);
                     String ramModel = reader.nextLine().substring(11);
                     double ramPrice = Double.parseDouble(reader.nextLine().substring(11));
                     int ramCapacity = Integer.parseInt(reader.nextLine().substring(14));
                     int ramSpeed = Integer.parseInt(reader.nextLine().substring(11));
-                    int ramLatency = Integer.parseInt(reader.nextLine().substring(14));
-                    RAM ram = new RAM(
-                        ramCapacity,
-                        ramSpeed,
-                        ramLatency,
-                        ramBrand,
-                        ramModel,
-                        ramPrice
-                    );
+                    int ramLatency = Integer.parseInt(reader.nextLine().substring(13));
+                    RAM ram = new RAM(ramCapacity, ramSpeed, ramLatency, ramBrand, ramModel, ramPrice);
                     // STORAGE
                     String storageBrand = reader.nextLine().substring(15);
                     String storageModel = reader.nextLine().substring(15);
                     double storagePrice = Double.parseDouble(reader.nextLine().substring(15));
                     String storageType = reader.nextLine().substring(14);
                     int storageCapacity = Integer.parseInt(reader.nextLine().substring(18));
-                    Storage storage = new Storage(
-                        storageType,
-                        storageCapacity,
-                        storageBrand,
-                        storageModel,
-                        storagePrice
-                    );
+                    Storage storage = new Storage(storageType, storageCapacity, storageBrand, storageModel, storagePrice);
                     // PSU
                     String psuBrand = reader.nextLine().substring(11);
                     String psuModel = reader.nextLine().substring(11);
                     double psuPrice = Double.parseDouble(reader.nextLine().substring(11));
                     int psuWatt = Integer.parseInt(reader.nextLine().substring(10));
                     String psuEfficiency = reader.nextLine().substring(16);
-                    boolean psuModular = Boolean.parseBoolean(
-                        reader.nextLine().substring(13)
-                    );
-                    PSU psu = new PSU(
-                        psuWatt,
-                        psuEfficiency,
-                        psuModular,
-                        psuBrand,
-                        psuModel,
-                        psuPrice
-                    );
+                    boolean psuModular = Boolean.parseBoolean(reader.nextLine().substring(13));
+                    PSU psu = new PSU(psuWatt, psuEfficiency, psuModular, psuBrand, psuModel, psuPrice);
                     // MB
                     String mbBrand = reader.nextLine().substring(10);
                     String mbModel = reader.nextLine().substring(10);
                     double mbPrice = Double.parseDouble(reader.nextLine().substring(10));
                     String mbSocket = reader.nextLine().substring(11);
                     int mbRamSlot = Integer.parseInt(reader.nextLine().substring(14));
-                    MotherBoard mb = new MotherBoard(
-                        mbSocket,
-                        mbRamSlot,
-                        mbBrand,
-                        mbModel,
-                        mbPrice
-                    );
-                    Computer pc = new Computer(
-                        cpu,
-                        gpu,
-                        ram,
-                        storage,
-                        psu,
-                        mb
-                    );
+                    MotherBoard mb = new MotherBoard(mbSocket, mbRamSlot, mbBrand, mbModel, mbPrice);
+                    // Total Price
+                    double totalPrice = Double.parseDouble(reader.nextLine().substring(13));
+                    Computer pc = new Computer(cpu, gpu, ram, storage, psu,mb, totalPrice);
                     pc.id = pcId;
                     user.pc = pc;
                 }
@@ -1603,7 +1490,7 @@ class FileManager {
             }
             reader.close();
         } catch(Exception e) {
-            System.out.println("Error Loading Users.");
+            System.out.println("Error Loading Users!");
         }
     }
     // Save Built Computers
@@ -1657,11 +1544,13 @@ class FileManager {
                 writer.write("MB Price: " + pc.mb.price + "\n");
                 writer.write("MB Socket: " + pc.mb.socket + "\n");
                 writer.write("MB Ram Slots: " + pc.mb.ramSlot + "\n");
+                // Total Price
+                writer.write("Total Price: " + pc.totalPrice + "\n");
                 writer.write("--------------------\n");
             }
             writer.close();
         } catch(IOException e) {
-            System.out.println("Error Saving Built Computers.");
+            System.out.println("Error Saving Built Computers!");
         }
     }
     // Load Built Computers
@@ -1681,17 +1570,7 @@ class FileManager {
                 int cpuCache = Integer.parseInt(reader.nextLine().substring(11));
                 int cpuTdp = Integer.parseInt(reader.nextLine().substring(9));
                 String cpuSocket = reader.nextLine().substring(12);
-                CPU cpu = new CPU(
-                    cpuCores,
-                    cpuThreads,
-                    cpuClock,
-                    cpuCache,
-                    cpuTdp,
-                    cpuSocket,
-                    cpuBrand,
-                    cpuModel,
-                    cpuPrice
-                );
+                CPU cpu = new CPU(cpuCores, cpuThreads, cpuClock, cpuCache, cpuTdp, cpuSocket, cpuBrand, cpuModel, cpuPrice);
                 // GPU
                 String gpuBrand = reader.nextLine().substring(11);
                 String gpuModel = reader.nextLine().substring(11);
@@ -1700,15 +1579,7 @@ class FileManager {
                 int gpuCores = Integer.parseInt(reader.nextLine().substring(11));
                 int gpuSpeed = Integer.parseInt(reader.nextLine().substring(11));
                 int gpuTdp = Integer.parseInt(reader.nextLine().substring(9));
-                GPU gpu = new GPU(
-                    gpuVRAM,
-                    gpuCores,
-                    gpuSpeed,
-                    gpuTdp,
-                    gpuBrand,
-                    gpuModel,
-                    gpuPrice
-                );
+                GPU gpu = new GPU(gpuVRAM, gpuCores, gpuSpeed, gpuTdp, gpuBrand, gpuModel, gpuPrice);
                 // RAM
                 String ramBrand = reader.nextLine().substring(11);
                 String ramModel = reader.nextLine().substring(11);
@@ -1716,27 +1587,14 @@ class FileManager {
                 int ramCapacity = Integer.parseInt(reader.nextLine().substring(14));
                 int ramSpeed = Integer.parseInt(reader.nextLine().substring(11));
                 int ramLatency = Integer.parseInt(reader.nextLine().substring(13));
-                RAM ram = new RAM(
-                    ramCapacity,
-                    ramSpeed,
-                    ramLatency,
-                    ramBrand,
-                    ramModel,
-                    ramPrice
-                );
+                RAM ram = new RAM( ramCapacity, ramSpeed, ramLatency, ramBrand, ramModel, ramPrice);
                 // STORAGE
                 String storageBrand = reader.nextLine().substring(15);
                 String storageModel = reader.nextLine().substring(15);
                 double storagePrice = Double.parseDouble(reader.nextLine().substring(15));
                 String storageType = reader.nextLine().substring(14);
                 int storageCapacity = Integer.parseInt(reader.nextLine().substring(18));
-                Storage storage = new Storage(
-                    storageType,
-                    storageCapacity,
-                    storageBrand,
-                    storageModel,
-                    storagePrice
-                );
+                Storage storage = new Storage(storageType, storageCapacity, storageBrand, storageModel, storagePrice);
                 // PSU
                 String psuBrand = reader.nextLine().substring(11);
                 String psuModel = reader.nextLine().substring(11);
@@ -1744,35 +1602,17 @@ class FileManager {
                 int psuWatt = Integer.parseInt(reader.nextLine().substring(10));
                 String psuEfficiency = reader.nextLine().substring(16);
                 boolean psuModular = Boolean.parseBoolean(reader.nextLine().substring(13));
-                PSU psu = new PSU(
-                    psuWatt,
-                    psuEfficiency,
-                    psuModular,
-                    psuBrand,
-                    psuModel,
-                    psuPrice
-                );
+                PSU psu = new PSU(psuWatt, psuEfficiency, psuModular, psuBrand, psuModel, psuPrice);
                 // MB
                 String mbBrand = reader.nextLine().substring(10);
                 String mbModel = reader.nextLine().substring(10);
                 double mbPrice = Double.parseDouble(reader.nextLine().substring(10));
                 String mbSocket = reader.nextLine().substring(11);
                 int mbRamSlots = Integer.parseInt(reader.nextLine().substring(14));
-                MotherBoard mb = new MotherBoard(
-                    mbSocket,
-                    mbRamSlots,
-                    mbBrand,
-                    mbModel,
-                    mbPrice
-                );
-                Computer pc = new Computer(
-                    cpu,
-                    gpu,
-                    ram,
-                    storage,
-                    psu,
-                    mb
-                );
+                MotherBoard mb = new MotherBoard(mbSocket, mbRamSlots, mbBrand, mbModel, mbPrice);
+                // Total Price
+                double totalPrice = Double.parseDouble(reader.nextLine().substring(13));
+                Computer pc = new Computer(cpu, gpu, ram, storage, psu, mb, totalPrice);
                 pc.id = pcId;
                 builtComputers.add(pc);
                 reader.nextLine();
@@ -1788,7 +1628,6 @@ public class Main{
     static Scanner sc = new Scanner(System.in);
     static Inventory inventory = new Inventory();
     static ArrayList<User> users = new ArrayList<>();
-    
     public static void main(String[] args) {
         // Initialize Files
         FileManager.initializeFiles();

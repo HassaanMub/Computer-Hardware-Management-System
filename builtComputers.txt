@@ -20,7 +20,7 @@ RAM Model: Vengeance DDR5 16x1
 RAM Price: 74999.0
 RAM Capacity: 16
 RAM Speed: 6000
-RAM Latency: 6
+RAM Latency: 16
 Storage Brand: Seagate
 Storage Model: BarraCuda
 Storage Price: 42000.0
@@ -37,6 +37,7 @@ MB Model: B650
 MB Price: 30000.0
 MB Socket: AM5
 MB Ram Slots: 2
+Total Price: 276498.0
 --------------------
 Computer ID: 1
 CPU Brand: AMD
@@ -60,7 +61,7 @@ RAM Model: Flare X5 DDR5 16x2
 RAM Price: 114000.0
 RAM Capacity: 32
 RAM Speed: 6000
-RAM Latency: 6
+RAM Latency: 36
 Storage Brand: Western Digital
 Storage Model: Blue WD10
 Storage Price: 15500.0
@@ -77,4 +78,169 @@ MB Model: X870
 MB Price: 120000.0
 MB Socket: AM5
 MB Ram Slots: 2
+Total Price: 472498.0
+--------------------
+Computer ID: 2
+CPU Brand: Intel
+CPU Model: Core i5 14400F
+CPU Price: 58000.0
+CPU Cores: 10
+CPU Threads: 16
+CPU Clock Speed: 4.7
+CPU Cache: 29
+CPU TDP: 148
+CPU Socket: LGA 1700
+GPU Brand: Nvidia
+GPU Model: RTX 4060
+GPU Price: 98000.0
+GPU VRAM: 8
+GPU Cores: 3072
+GPU Speed: 1830
+GPU TDP: 115
+RAM Brand: Corsair
+RAM Model: Vengeance DDR5 16x2
+RAM Price: 27000.0
+RAM Capacity: 32
+RAM Speed: 5600
+RAM Latency: 36
+Storage Brand: Kingston
+Storage Model: NV3 1TB
+Storage Price: 16500.0
+Storage Type: NVMe SSD
+Storage Capacity: 1000
+PSU Brand: DeepCool
+PSU Model: PK650D
+PSU Price: 18500.0
+PSU Watt: 650
+PSU Efficiency: Bronze
+PSU Modular: false
+MB Brand: MSI
+MB Model: PRO B760M-A WIFI
+MB Price: 42000.0
+MB Socket: LGA 1700
+MB Ram Slots: 4
+Total Price: 260000.0
+--------------------
+Computer ID: 4
+CPU Brand: Intel
+CPU Model: Core i7-14700K
+CPU Price: 112000.0
+CPU Cores: 20
+CPU Threads: 28
+CPU Clock Speed: 5.6
+CPU Cache: 61
+CPU TDP: 253
+CPU Socket: LGA1700
+GPU Brand: Nvidia
+GPU Model: RTX 4070 SUPER
+GPU Price: 215000.0
+GPU VRAM: 12
+GPU Cores: 7168
+GPU Speed: 1980
+GPU TDP: 220
+RAM Brand: Kingston
+RAM Model: Fury Beast DDR5 16x2
+RAM Price: 34000.0
+RAM Capacity: 32
+RAM Speed: 6000
+RAM Latency: 36
+Storage Brand: Samsung
+Storage Model: 990 EVO 2TB
+Storage Price: 42000.0
+Storage Type: NVMe SSD
+Storage Capacity: 2000
+PSU Brand: Seasonic
+PSU Model: Focus GX-850
+PSU Price: 42000.0
+PSU Watt: 850
+PSU Efficiency: Gold
+PSU Modular: true
+MB Brand: ASUS
+MB Model: TUF Gaming Z790-Plus WiFi
+MB Price: 85000.0
+MB Socket: LGA1700
+MB Ram Slots: 4
+Total Price: 530000.0
+--------------------
+Computer ID: 5
+CPU Brand: AMD
+CPU Model: Ryzen 9 9950X
+CPU Price: 210000.0
+CPU Cores: 16
+CPU Threads: 32
+CPU Clock Speed: 5.7
+CPU Cache: 80
+CPU TDP: 170
+CPU Socket: AM5
+GPU Brand: Nvidia
+GPU Model: RTX 5080
+GPU Price: 480000.0
+GPU VRAM: 16
+GPU Cores: 10752
+GPU Speed: 2295
+GPU TDP: 360
+RAM Brand: Corsair
+RAM Model: Vengeance DDR5 32x2
+RAM Price: 48000.0
+RAM Capacity: 64
+RAM Speed: 6400
+RAM Latency: 32
+Storage Brand: Samsung
+Storage Model: 990 PRO 2TB
+Storage Price: 45000.0
+Storage Type: NVMe SSD
+Storage Capacity: 2000
+PSU Brand: Corsair
+PSU Model: RM1000e
+PSU Price: 52000.0
+PSU Watt: 1000
+PSU Efficiency: Gold
+PSU Modular: true
+MB Brand: ASUS
+MB Model: ROG Strix X870-E
+MB Price: 95000.0
+MB Socket: AM5
+MB Ram Slots: 4
+Total Price: 930000.0
+--------------------
+Computer ID: 7
+CPU Brand: AMD
+CPU Model: Ryzen 7 9800X3D
+CPU Price: 128999.0
+CPU Cores: 8
+CPU Threads: 16
+CPU Clock Speed: 5.2
+CPU Cache: 104
+CPU TDP: 120
+CPU Socket: AM5
+GPU Brand: AMD
+GPU Model: Radeon RX 7900 XTX
+GPU Price: 320000.0
+GPU VRAM: 24
+GPU Cores: 6144
+GPU Speed: 2300
+GPU TDP: 355
+RAM Brand: Kingston
+RAM Model: Fury Beast DDR5 16x2
+RAM Price: 32000.0
+RAM Capacity: 32
+RAM Speed: 6000
+RAM Latency: 36
+Storage Brand: WD
+Storage Model: Black SN850X 2TB
+Storage Price: 40000.0
+Storage Type: NVMe SSD
+Storage Capacity: 2000
+PSU Brand: DeepCool
+PSU Model: PX1000G
+PSU Price: 42000.0
+PSU Watt: 1000
+PSU Efficiency: Gold
+PSU Modular: true
+MB Brand: Gigabyte
+MB Model: X870 AORUS Elite
+MB Price: 65000.0
+MB Socket: AM5
+MB Ram Slots: 4
+Total Price: 627999.0
 --------------------

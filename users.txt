@@ -1,6 +1,46 @@
 User ID: 0
 Name: Hassaan Mubarak
-Has PC: false
+Has PC: true
+Computer ID: 6
+CPU Brand: Intel
+CPU Model: Core Ultra 9 285K
+CPU Price: 230000.0
+CPU Cores: 24
+CPU Threads: 24
+CPU Clock Speed: 5.7
+CPU Cache: 76
+CPU TDP: 125
+CPU Socket: LGA1851
+GPU Brand: Nvidia
+GPU Model: RTX 5090
+GPU Price: 850000.0
+GPU VRAM: 32
+GPU Cores: 21760
+GPU Speed: 2407
+GPU TDP: 575
+RAM Brand: G.Skill
+RAM Model: Trident Z5 RGB 32x2
+RAM Price: 55000.0
+RAM Capacity: 64
+RAM Speed: 7200
+RAM Latency: 34
+Storage Brand: Samsung
+Storage Model: 990 PRO 4TB
+Storage Price: 85000.0
+Storage Type: NVMe SSD
+Storage Capacity: 4000
+PSU Brand: MSI
+PSU Model: MEG Ai1300P
+PSU Price: 90000.0
+PSU Watt: 1300
+PSU Efficiency: Platinum
+PSU Modular: true
+MB Brand: MSI
+MB Model: MEG Z890 ACE
+MB Price: 140000.0
+MB Socket: LGA1851
+MB Ram Slots: 4
+Total Price: 1450000.0
 --------------------
 User ID: 1
 Name: Aabir Hassan
@@ -12,5 +52,45 @@ Has PC: false
 --------------------
 User ID: 3
 Name: Ayan Muhammad
-Has PC: false
+Has PC: true
+Computer ID: 3
+CPU Brand: AMD
+CPU Model: Ryzen 5 7600
+CPU Price: 62000.0
+CPU Cores: 6
+CPU Threads: 12
+CPU Clock Speed: 5.1
+CPU Cache: 38
+CPU TDP: 65
+CPU Socket: AM5
+GPU Brand: AMD
+GPU Model: RX 7700 XT
+GPU Price: 145000.0
+GPU VRAM: 12
+GPU Cores: 3456
+GPU Speed: 1700
+GPU TDP: 245
+RAM Brand: TeamGroup
+RAM Model: T-Force Delta RGB DDR5 16x2
+RAM Price: 32000.0
+RAM Capacity: 32
+RAM Speed: 6000
+RAM Latency: 30
+Storage Brand: Lexar
+Storage Model: NM790 1TB
+Storage Price: 22000.0
+Storage Type: NVMe SSD
+Storage Capacity: 1000
+PSU Brand: Corsair
+PSU Model: RM750e
+PSU Price: 33000.0
+PSU Watt: 750
+PSU Efficiency: Gold
+PSU Modular: true
+MB Brand: Gigabyte
+MB Model: B650M DS3H
+MB Price: 48000.0
+MB Socket: AM5
+MB Ram Slots: 4
+Total Price: 342000.0
 --------------------

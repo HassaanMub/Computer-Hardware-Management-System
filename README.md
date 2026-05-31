@@ -198,4 +198,3 @@ Data is loaded automatically at startup and saved on exit (option 8).
 - Implement search and filter functionality for large inventories
 - Switch to JSON or a database (e.g., SQLite) for more robust persistence
 - Split classes into separate `.java` files for better maintainability
-- Add a pricing summary / total cost when building a computer
