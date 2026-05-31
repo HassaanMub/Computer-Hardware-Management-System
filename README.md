@@ -1,6 +1,6 @@
 # Computer Hardware Management System
 
-A Console-Based Java Application for anaging a computer hardware store. It supports full inventory management of PC components, lets you build computers from those parts, and handles user accounts with buy/sell transactions — all with persistent file-based storage.
+A Console-Based Java Application for anaging a computer hardware store. It supports full inventory management of PC components, lets you build computers from those parts, and handles user accounts with buy/sell transactions - all with persistent file-based storage.
 
 ---
 
@@ -21,13 +21,13 @@ A Console-Based Java Application for anaging a computer hardware store. It suppo
 
 ## Features
 
-- **Hardware Inventory Management** — Add, edit, delete, and view six types of PC components:
+- **Hardware Inventory Management** - Add, edit, delete, and view six types of PC components:
   - CPU, GPU, RAM, Storage, PSU, Motherboard
-- **PC Builder** — Assemble a computer by selecting one of each component from inventory; parts are removed from stock upon use
-- **User Management** — Create and manage user profiles
-- **Buy & Sell System** — Sell built computers to users, and buy them back into inventory
-- **Persistent Storage** — All data is saved to plain-text `.txt` files and reloaded on the next launch
-- **Edit-in-Place** — Press Enter to keep any existing field value when editing a record
+- **PC Builder** - Assemble a computer by selecting one of each component from inventory; parts are removed from stock upon use
+- **User Management** - Create and manage user profiles
+- **Buy & Sell System** - Sell built computers to users, and buy them back into inventory
+- **Persistent Storage** - All data is saved to plain-text `.txt` files and reloaded on the next launch
+- **Edit-in-Place** - Press Enter to keep any existing field value when editing a record
 
 ---
 
@@ -143,7 +143,7 @@ Select option **1**, then choose the component type. You'll be prompted to enter
 Select option **2**, choose the component type, pick a record from the list, then enter new values. **Press Enter to keep the current value** for any field.
 
 ### Building a Computer
-Select option **6**. You'll walk through 6 steps — selecting a CPU, GPU, RAM, Storage, PSU, and Motherboard from available inventory. The selected parts are removed from inventory and assembled into a new `Computer` record.
+Select option **6**. You'll walk through 6 steps, selecting a CPU, GPU, RAM, Storage, PSU, and Motherboard from available inventory. The selected parts are removed from inventory and assembled into a new `Computer` record.
 
 ### Managing Users
 Select option **7** to access the user submenu:
@@ -163,7 +163,7 @@ Select option **8**. All data is written to the `.txt` files before the program 
 
 Each component type and entity is saved to its own file in a labeled plain-text format:
 
-**Example — `cpus.txt`:**
+**Example `cpus.txt`:**
 ```
 ID: 0
 Brand: Intel
@@ -184,11 +184,11 @@ Data is loaded automatically at startup and saved on exit (option 8).
 
 ## Known Limitations
 
-- **Single-file source** — All classes are in one `.java` file, which limits scalability for larger projects.
-- **No compatibility validation** — The build process does not check socket compatibility between CPU and Motherboard.
-- **No quantity tracking** — Each hardware entry represents a single unit; there is no stock count per model.
-- **Plain-text storage** — The file format is sensitive to manual edits; corrupted files may cause load errors.
-- **No search/filter** — Hardware can only be browsed by scrolling through the full list.
+- **Single-file source** - All classes are in one `.java` file, which limits scalability for larger projects.
+- **No compatibility validation** - The build process does not check socket compatibility between CPU and Motherboard.
+- **No quantity tracking** - Each hardware entry represents a single unit; there is no stock count per model.
+- **Plain-text storage** - The file format is sensitive to manual edits; corrupted files may cause load errors.
+- **No search/filter** - Hardware can only be browsed by scrolling through the full list.
 
 ---
 
